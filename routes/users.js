@@ -4,8 +4,7 @@ var router = express.Router();
 // localhost:3000/users
 router.get("/", function(req, res, next) {
     res.send(
-        "Sử dụng process.env để truyền vào và thay thế users bên trong app.js "
-    );
-});
-
+        "USER "
+    ),
+}),
 module.exports = router;

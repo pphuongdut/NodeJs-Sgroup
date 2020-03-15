@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body class="p-0 mh-100">
+    <div class="container pt-2 ">
+        <div class="row ">
+            <div class="col-6">
+                <a class="navbar-brand float-left border border-info text-dark text-center" href="/"
+                    style="width: 120px;">
+                    <span class="font-weight-bold">Admin</span>LTE</a>
+            </div>
+            <div class="col-6">
+                <ul class="nav justify-content-end transparent ">
+
+                    <li class="nav-item">
+                        <a class="nav-link active text-decoration-none text-dark font-weight-bold" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-decoration-none text-secondary" href="#">Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-decoration-none text-secondary"
+                            href="https://dashboardpack.com/">Premium
+                            Templates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-decoration-none text-secondary" href="#">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-decoration-none text-secondary" href="#">Subscribe</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container  p-4 ">
+        <h3 class=" font-weight-bold"> Login </h3>
+        <form class=" py-3" action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email </label>
+                <input type="email" class="form-control w-50" id="email" name="email" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control w-50" id="password" name="password" placeholder="Password">
+            </div>
+
+            <button type="submit" class="btn btn-primary"> Log in </button>
+        </form>
+        <a class="" href="/register"> Creat new account </a>
+    </div>
+
+    <footer class="footer bg-dark text-white pb-0 fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 align-middle">
+                    Copyright © 2014-2019 <b><a href="/" class="text-white text-decoration-none">AdminLTE</a></b>.
+                    All rights reserved.
+                    <b><a href="/privacy" class="text-white text-decoration-none">Privacy Policy</a></b>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <a href="https://twitter.com/colorlib" class="btn btn-twitter btn-social" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Twitter Account"><i
+                            class="fa fa-twitter text-white "></i></a>
+                    <a href="https://www.facebook.com/colorlib" class="btn btn-facebook btn-social"
+                        data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook Page"><i
+                            class="fa fa-facebook text-white"></i></a>
+                    <a href="https://github.com/ColorlibHQ" class="btn btn-github btn-social" data-toggle="tooltip"
+                        data-placement="top" title="" data-original-title="Github Repositories"><i
+                            class="fa fa-github text-white"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
