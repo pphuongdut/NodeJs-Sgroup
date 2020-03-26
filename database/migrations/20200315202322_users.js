@@ -12,7 +12,10 @@ exports.up = function(knex) {
         table
             .timestamp('updated_at')
             .defaultTo(
-                knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-    }),
-
-exports.down = function(knex) {},
+                knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            );
+    });
+};
+exports.down = function(knex) {
+    return knex.schema.dropTable('users');
+};
