@@ -46,7 +46,7 @@ app.use(
         store: sessionStore,
         resave: false,
         saveUninitialized: false,
-    }),
+    })
 );
 
 app.use('/', adminRouter);

@@ -32,8 +32,11 @@ router
 //register
 router
     .route('/register')
-    .get(authmiddleware.verifynotAuthentication, registerRender)
-    .post(registerMethod);
+    .get(
+        authmiddleware.verifynotAuthentication,
+        registerRender,
+    )
+    .post(validateRegisterUser, registerMethod ,registerRender);
 //logout
 router.post('/logout', logoutMethod);
 

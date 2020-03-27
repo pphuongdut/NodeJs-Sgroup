@@ -1,4 +1,4 @@
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 // check user to login
 const verifyAuthentication = (req, res, next) => {
@@ -14,14 +14,21 @@ const verifynotAuthentication = (req, res, next) => {
     return res.redirect('/users');
 };
 // validator
-const validateRegisterUser = (req,res,next) => {
-    
-    return [
-        check('req.body.email', 'Invalid email').isEmail(),
-        check('req.body.password', 'password more than 6 degits').isLength({
+const validateRegisterUser = (req, res, next) => {
+    {
+        check('req.body.password', 'Password more than 6 degits').isLength({
             min: 6,
         }),
-    ];
+            check(
+                'req.body.confirmpassword',
+                'Password need to confirm',
+            ).equals('req.body.confirmpassword');
+    }
+    return next();
 };
 
-module.exports = { verifyAuthentication, verifynotAuthentication, validateRegisterUser};
+module.exports = {
+    verifyAuthentication,
+    verifynotAuthentication,
+    validateRegisterUser,
+};

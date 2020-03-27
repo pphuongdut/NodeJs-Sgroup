@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const knex = require('../../../../database/knex');
 const {check, validationResult } = require('express-validator');
 const flash = require('connect-flash-plus');
+
 // Render
 const loginRender = (req, res) => {
     return res.render('Login', {
@@ -10,8 +11,9 @@ const loginRender = (req, res) => {
 };
 const registerRender = (req, res) => {
     return res.render('register', {
-        title: 'Register',
+        title: 'Register', success: false, errors: req.session.errors
     });
+    req.session.errors=null;
 };
 const homepageRender = (req, res) => {
     return res.render('index', {
@@ -42,17 +44,17 @@ const loginMethod = async (req, res) => {
         return res.redirect('/login');
     }
 };
-const registerMethod = async (req, res) => {
-    [
-        check('req.body.email', 'Invalid email').isEmail(),
-        check('req.body.password', 'password more than 6 degits').isLength({
-            min: 6,
-        }),
-    ];
+const registerMethod = async (req, res,next) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+    console.log(validationResult(req));
+    if (errors) {
+        req.session.errors =errors;
+        req.session.success = true; 
+        console.log(errors)
+        return next();
     }
+    else {
+        console.log('đăng kí oke')
     const { email, password, fullname, username } = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -63,6 +65,8 @@ const registerMethod = async (req, res) => {
         password: hashedPassword,
     });
     return res.redirect('/login');
+}
+
 };
 const logoutMethod = async (req, res) => {
     req.session.destroy(function(err) {
