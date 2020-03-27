@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+
 const authmiddleware = require('../app/Admin/Auth/Middlewares/Auth.middleware');
-const validator = require('./validator');
+const {
+    validateRegisterUser,
+} = require('../app/Admin/Auth/Middlewares/Auth.middleware');
 const {
     loginRender,
     registerRender,
@@ -17,7 +20,7 @@ const {
     userDelete,
 } = require('../app/Admin/User/Controllers/User.controller');
 // users
-router.use('/users', authmiddleware.verifyAuthentication, usersRender);
+router.get('/users', authmiddleware.verifyAuthentication, usersRender);
 //home
 router.get('/', homepageRender);
 //login
@@ -29,24 +32,21 @@ router
 //register
 router
     .route('/register')
-    .get(
-        authmiddleware.verifynotAuthentication,
-        validator.validateRegisterUser(),
-        registerRender,
-    )
+    .get(authmiddleware.verifynotAuthentication, registerRender)
     .post(registerMethod);
 //logout
 router.post('/logout', logoutMethod);
 
 //view user
+
 router.route('/users/:id').get(authmiddleware.verifyAuthentication, userView);
 
 // edit user
-router.route('/:id/edit').put(authmiddleware.verifyAuthentication, userEdit);
+router.route('/edit/:id').post(authmiddleware.verifyAuthentication, userEdit);
 
 //delete user
 router
-    .route('/:id/delete')
-    .delete(authmiddleware.verifyAuthentication, userDelete);
+    .route('/delete/:id')
+    .post(authmiddleware.verifyAuthentication, userDelete);
 
 module.exports = router;

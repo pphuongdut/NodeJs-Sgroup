@@ -9,16 +9,26 @@ const MySQLStore = require('express-mysql-session')(session);
 const mysql = require('mysql');
 const app = express();
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(
+    methodOverride(req => {
+        if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+            // look in urlencoded POST bodies and delete it
+            const method = req.body._method;
+            delete req.body._method;
+            return method;
+        }
+    }),
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.urlencoded({ extended: true }));
 const options = {
     host: 'localhost',
     port: 3306,
@@ -40,6 +50,7 @@ app.use(
 );
 
 app.use('/', adminRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
@@ -56,14 +67,4 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-app.use(
-    methodOverride(req => {
-        if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-            // look in urlencoded POST bodies and delete it
-            const method = req.body._method;
-            delete req.body._method;
-            return method;
-        }
-    }),
-);
 module.exports = app;

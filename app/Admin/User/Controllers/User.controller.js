@@ -1,30 +1,31 @@
 const moment = require('moment');
 const knex = require('../../../../database/knex');
+
 // render
 const usersRender = async (req, res) => {
+    console.log('user render');
     const users = await knex('users').select('*');
     return res.render('users', { title: 'Users', users: users, moment });
 };
 
 // method
 
-const userView = async (req, res) => {
-    const user = await knex('users')
-        .where({
-            id: req.params.user_id,
-        })
-        .first('*');
-    console.log(user);
-    console.log(req.params);
-    return res.render('userprofile', {
-        title: 'Profile',
-        user,
-    });
+const userView = async (req, res, Promise) => {
+   const user_view = await knex('users')
+       .where({
+           id: req.params.id,
+       })
+       .select('*');
+   console.log(user_view);
+   return res.render('userprofile', {
+       title:'user',
+       users:user_view, moment
+   });
 };
 const userEdit = async (req, res) => {
     await knex('users')
         .where({
-            id: req.params.user_id,
+            id: req.params.id,
         })
         .update({
             fullname: req.body.fullname,
@@ -36,10 +37,9 @@ const userEdit = async (req, res) => {
 const userDelete = async (req, res) => {
     await knex('users')
         .where({
-            id: req.params.user_id,
+            id: req.params.id,
         })
         .delete();
-    console.log(users);
     return res.redirect('/users');
 };
 module.exports = {

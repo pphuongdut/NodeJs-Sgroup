@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const knex = require('../../../../database/knex');
-const { validationResult } = require('express-validator');
+const {check, validationResult } = require('express-validator');
+const flash = require('connect-flash-plus');
 // Render
 const loginRender = (req, res) => {
     return res.render('Login', {
@@ -31,7 +32,7 @@ const loginMethod = async (req, res) => {
         console.log(user.password);
         console.log(result);
         if (!result) {
-            return res.redirect('/login');
+            return res.redirect('/login', );
         } else {
             req.session.user = user;
             console.log(user);
@@ -42,6 +43,12 @@ const loginMethod = async (req, res) => {
     }
 };
 const registerMethod = async (req, res) => {
+    [
+        check('req.body.email', 'Invalid email').isEmail(),
+        check('req.body.password', 'password more than 6 degits').isLength({
+            min: 6,
+        }),
+    ];
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });

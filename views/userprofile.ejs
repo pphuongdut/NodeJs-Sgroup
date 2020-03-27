@@ -43,26 +43,33 @@
             </div>
         </div>
 
-        <table class="table pt-2">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope='col'>User Name</th>
-                    <th scope='col'>Full Name</th>
-                    <th scope='col'>Password</th>
-                    <th scope='col'>Email</th>
-                    <th scope='col'>User ID</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><%= user.fullname %></td>
-                    <td><%= user.username %></td>
-                    <td><%= user.password %></td>
-                    <td><%= user.email %></td>
-                    <td><%= user.id %></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container pt-5 pb-5 mb-5 ">
+            <table class="table pt-2 pl-3 pr-3">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope='col'>User Name</th>
+                        <th scope='col'>Full Name</th>
+                        <th scope='col'>Email</th>
+                        <th scope='col'>Creat at</th>
+                        <th scope='col'>Update at</th>
+                        <th scope='col'>User ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.fullname %></td>
+                        <td><%= user.username %></td>
+                        <td><%= user.email %></td>
+                        <td class="text-primary"><%= moment(user.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                        <td class="text-primary"><%= moment(user.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                        <td><%= user.id %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
         <footer class="footer bg-dark text-white pb-0 fixed-bottom">
             <div class="container">
                 <div class="row">
