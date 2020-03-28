@@ -47,15 +47,16 @@
     <div class="container  pb-5">
         <h3 class=" font-weight-bold"> Sign up </h3>
         <p> Creat an account to continue </p>
-        <% if (errors) { %>
-                        <% errors.forEach(error => { %>
-                                <p class="bg-danger"> <%= error.msg %> </a>
-                            <% }); %>
-        <% }
-        else { %>
-        <%
-
-        } %>
+                            <!-- if errors -->
+                            <ul class="">
+                                <% if(errors) { %>
+                                <% errors.forEach( error => { %>
+                                <li class="alert alert-danger">
+                                    <%= error.msg %>
+                                </li>
+                                <% }) %>
+                                <% } %>
+                            </ul>
         <form class="pb-2" action="/register" method="POST">
             <div class="form-group d-lex">
                 <label for="fullname ">Fullname </label>
@@ -76,12 +77,10 @@
                 <input type="password" class="form-control w-50" id="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <label for="confirmpassword">Confirm Password</label>
+                <label for="confirmpassword">Confirm password</label>
                 <input type="password" class="form-control w-50" id="confirmpassword" name="confirmpassword"
-                    placeholder="confirm Password">
+                    placeholder="Confirm password">
             </div>
-
-
             <button type="submit" class="btn btn-primary"> Sign up </button>
         </form>
         <a class="" href="/login">Have an account ? Login </a>

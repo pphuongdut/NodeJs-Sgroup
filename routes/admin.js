@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const knex= require('../database/knex')
 
-const authmiddleware = require('../app/Admin/Auth/Middlewares/Auth.middleware');
 const {
-    validateRegisterUser,
+    verifynotAuthentication,verifyAuthentication,
+    validatorRegister,
 } = require('../app/Admin/Auth/Middlewares/Auth.middleware');
+const { check, validationResult } = require('express-validator');
 const {
     loginRender,
     registerRender,
@@ -20,36 +22,59 @@ const {
     userDelete,
 } = require('../app/Admin/User/Controllers/User.controller');
 // users
-router.get('/users', authmiddleware.verifyAuthentication, usersRender);
+router.get('/users', verifyAuthentication, usersRender);
 //home
 router.get('/', homepageRender);
 //login
 router
     .route('/login')
-    .get(authmiddleware.verifynotAuthentication, loginRender)
-    .post(authmiddleware.verifynotAuthentication, loginMethod);
+    .get(verifynotAuthentication, loginRender)
+    .post(verifynotAuthentication, loginMethod);
 
 //register
 router
     .route('/register')
-    .get(
-        authmiddleware.verifynotAuthentication,
-        registerRender,
-    )
-    .post(validateRegisterUser, registerMethod ,registerRender);
+    .get(verifynotAuthentication, registerRender)
+    .post(
+        [
+            check('password', 'password more than 6 degits').isLength({
+                min: 6,
+            }),
+            check('email').custom(async value => {
+                await knex('users')
+                    .where({ email: value })
+                    .select('email')
+                    .then(result => {
+                        if (result.length !== 0) {
+                            throw new Error('Email is already in use');
+                        } else {
+                            return true;
+                        }
+                    });
+            }),
+            check('confirmpassword').custom((value, { req }) => {
+                if (value !== req.body.password) {
+                    throw new Error('Confirmpassword does not match ');
+                } else {
+                    return true;
+                }
+            }),
+        ],
+        registerMethod,
+    );
 //logout
 router.post('/logout', logoutMethod);
 
 //view user
 
-router.route('/users/:id').get(authmiddleware.verifyAuthentication, userView);
+router.route('/users/:id').get(verifyAuthentication, userView);
 
 // edit user
-router.route('/edit/:id').post(authmiddleware.verifyAuthentication, userEdit);
+router.route('/edit/:id').post(verifyAuthentication, userEdit);
 
 //delete user
 router
     .route('/delete/:id')
-    .post(authmiddleware.verifyAuthentication, userDelete);
+    .post(verifyAuthentication, userDelete);
 
 module.exports = router;

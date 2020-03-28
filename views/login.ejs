@@ -47,6 +47,18 @@
 
     <div class="container  p-4 ">
         <h3 class=" font-weight-bold"> Login </h3>
+
+        <!-- errors -->
+        <ul class="errors  list-unstyled">
+            <% if(errors) { %>
+            <% errors.forEach( error => { %>
+            <li class="alert alert-danger">
+                <%= error.msg %>
+            </li>
+            <% }) %>
+            <% } %>
+        </ul>
+
         <form class=" py-3" action="/login" method="POST">
             <div class="form-group">
                 <label for="email">Email </label>

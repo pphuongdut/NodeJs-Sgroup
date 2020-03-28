@@ -7,6 +7,7 @@ const session = require('express-session');
 const adminRouter = require('./routes/admin');
 const MySQLStore = require('express-mysql-session')(session);
 const mysql = require('mysql');
+const flash = require('connect-flash-plus');
 const app = express();
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
@@ -25,10 +26,10 @@ app.use(
 );
 app.use(logger('dev'));
 app.use(express.json());
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('serect'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
 const options = {
     host: 'localhost',
     port: 3306,
@@ -46,9 +47,10 @@ app.use(
         store: sessionStore,
         resave: false,
         saveUninitialized: false,
+        cookie: { maxAge:null}
     })
 );
-
+app.use(flash());
 app.use('/', adminRouter);
 
 // catch 404 and forward to error handler
