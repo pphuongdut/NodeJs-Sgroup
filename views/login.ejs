@@ -49,15 +49,15 @@
         <h3 class=" font-weight-bold"> Login </h3>
 
         <!-- errors -->
-        <ul class="errors  list-unstyled">
+        <div class="w-50">
             <% if(errors) { %>
             <% errors.forEach( error => { %>
-            <li class="alert alert-danger">
+            <p class="alert alert-danger">
                 <%= error.msg %>
-            </li>
+            </p>
             <% }) %>
             <% } %>
-        </ul>
+        </div>
 
         <form class=" py-3" action="/login" method="POST">
             <div class="form-group">

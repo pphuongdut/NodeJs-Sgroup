@@ -43,7 +43,8 @@ const loginMethod = async (req, res) => {
         }
     } else {
         req.flash('error', 'Email is not exist');
-        return res.render('/login', {
+        return res.render('login', {
+            title: 'login',
             errors: errors.array(),
             messages: '',
         });
@@ -55,8 +56,13 @@ const registerMethod = async (req, res, next) => {
     console.log(validationResult(req));
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.render('/register', {
+        console.log(errors.array());
+        return res.render('register', {
+            title: 'register',
             errors: errors.array(),
+            username,
+            email,
+            fullname,
         });
     } else {
         console.log('đăng kí oke');
@@ -69,7 +75,7 @@ const registerMethod = async (req, res, next) => {
             password: hashedPassword,
         });
         //Success Message
-        req.flash('success', `${name} Log in now`);
+        req.flash('success', 'Log in now' );
         return res.redirect('/login');
     }
 };

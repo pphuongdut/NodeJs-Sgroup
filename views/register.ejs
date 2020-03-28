@@ -48,15 +48,15 @@
         <h3 class=" font-weight-bold"> Sign up </h3>
         <p> Creat an account to continue </p>
                             <!-- if errors -->
-                            <ul class="">
+                            <div class="w-50">
                                 <% if(errors) { %>
                                 <% errors.forEach( error => { %>
-                                <li class="alert alert-danger">
+                                <p class="alert alert-danger">
                                     <%= error.msg %>
-                                </li>
+                                </p>
                                 <% }) %>
                                 <% } %>
-                            </ul>
+                            </div>
         <form class="pb-2" action="/register" method="POST">
             <div class="form-group d-lex">
                 <label for="fullname ">Fullname </label>
