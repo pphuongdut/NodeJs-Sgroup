@@ -4,26 +4,29 @@ const { validationResult } = require('express-validator');
 
 // Render
 const loginRender = (req, res) => {
-    return res.render('Login', {
+    return res.render('admin/pages/Login', {
         title: 'Login',
         errors: '',
         messages: '',
     });
 };
 const registerRender = (req, res) => {
-    return res.render('register', {
+    return res.render('admin/pages/register', {
         title: 'Register',
         errors: '',
     });
 };
 const homepageRender = (req, res) => {
-    return res.render('index', {
+    const user = req.session.user;
+    return res.render('admin/pages/index', {
         title: 'Home',
+        user :user
     });
 };
 //Method
 const loginMethod = async (req, res) => {
     const errors = validationResult(req);
+    console.log(errors.array());
     const { email, password } = req.body;
     const user = await knex('users')
         .where({
@@ -35,7 +38,11 @@ const loginMethod = async (req, res) => {
         var result = bcrypt.compareSync(password, user.password);
         if (!result) {
             req.flash('error', 'Wrong password');
-            return res.redirect('/login');
+            return res.render('admin/pages/login', {
+                title: ' Log in',
+                errors: errors.array(),
+                messages: '',
+            });
         } else {
             req.session.user = user;
             console.log(user);
@@ -43,7 +50,8 @@ const loginMethod = async (req, res) => {
         }
     } else {
         req.flash('error', 'Email is not exist');
-        return res.render('login', {
+        console.log(errors.array())
+        return res.render('admin/pages/login', {
             title: 'login',
             errors: errors.array(),
             messages: '',
@@ -57,7 +65,7 @@ const registerMethod = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors.array());
-        return res.render('register', {
+        return res.render('admin/pages/register', {
             title: 'register',
             errors: errors.array(),
             username,
@@ -65,7 +73,6 @@ const registerMethod = async (req, res, next) => {
             fullname,
         });
     } else {
-        console.log('đăng kí oke');
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         await knex('users').insert({

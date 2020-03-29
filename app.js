@@ -14,8 +14,14 @@ const bodyParser = require('body-parser');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(logger('dev'));
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser('serect'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
-    methodOverride(req => {
+    methodOverride((req, res) => {
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
             // look in urlencoded POST bodies and delete it
             const method = req.body._method;
@@ -24,12 +30,10 @@ app.use(
         }
     }),
 );
-app.use(logger('dev'));
-app.use(express.json());
-app.use(bodyParser.json())
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser('serect'));
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(function(req, res, next) {
+//     res.locals.flashMessages = req.flash();
+//     next();
+// });
 const options = {
     host: 'localhost',
     port: 3306,
@@ -47,8 +51,8 @@ app.use(
         store: sessionStore,
         resave: false,
         saveUninitialized: false,
-        cookie: { maxAge:null}
-    })
+        cookie: { maxAge: null },
+    }),
 );
 app.use(flash());
 app.use('/', adminRouter);

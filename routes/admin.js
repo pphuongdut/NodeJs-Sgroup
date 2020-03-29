@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const knex= require('../database/knex')
+const knex = require('../database/knex');
 
 const {
-    verifynotAuthentication,verifyAuthentication,
+    verifynotAuthentication,
+    verifyAuthentication,
     validatorRegister,
 } = require('../app/Admin/Auth/Middlewares/Auth.middleware');
 const { check, validationResult } = require('express-validator');
@@ -70,11 +71,9 @@ router.post('/logout', logoutMethod);
 router.route('/users/:id').get(verifyAuthentication, userView);
 
 // edit user
-router.route('/edit/:id').post(verifyAuthentication, userEdit);
+router.route('/edit/:id').put(verifyAuthentication, userEdit);
 
 //delete user
-router
-    .route('/delete/:id')
-    .post(verifyAuthentication, userDelete);
+router.route('/delete/:id').delete(verifyAuthentication, userDelete);
 
 module.exports = router;
