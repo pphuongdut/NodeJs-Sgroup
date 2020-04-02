@@ -17,10 +17,17 @@ const registerRender = (req, res) => {
     });
 };
 const homepageRender = (req, res) => {
-    const user = req.session.user;
+    const usernow = req.session.user;
     return res.render('admin/pages/index', {
         title: 'Home',
-        user :user
+        usernow:usernow,
+    });
+};
+const dashboardRender = (req, res) => {
+    const usernow = req.session.user;
+    return res.render('admin/pages/dashboard', {
+        title: 'Dashboard',
+        usernow:usernow
     });
 };
 //Method
@@ -68,9 +75,6 @@ const registerMethod = async (req, res, next) => {
         return res.render('admin/pages/register', {
             title: 'register',
             errors: errors.array(),
-            username,
-            email,
-            fullname,
         });
     } else {
         const salt = bcrypt.genSaltSync(10);
@@ -100,6 +104,7 @@ module.exports = {
     loginRender,
     registerRender,
     homepageRender,
+    dashboardRender,
     loginMethod,
     registerMethod,
     logoutMethod,

@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const knex = require('../database/knex');
-
 const {
     verifynotAuthentication,
     verifyAuthentication,
     validatorRegister,
 } = require('../app/Admin/Auth/Middlewares/Auth.middleware');
-const { check, validationResult } = require('express-validator');
 const {
     loginRender,
     registerRender,
     homepageRender,
+    dashboardRender,
     loginMethod,
     registerMethod,
     logoutMethod,
@@ -22,10 +20,18 @@ const {
     userEdit,
     userDelete,
 } = require('../app/Admin/User/Controllers/User.controller');
+const {
+    productsRender,
+    productTypeMethod,
+    productTypeEdit,
+    productTypeDelete
+} = require('../app/Admin/Products/Controllers/Products.controller');
 // users
 router.get('/users', verifyAuthentication, usersRender);
 //home
 router.get('/', homepageRender);
+//dashboard
+router.get('/dashboard', dashboardRender);
 //login
 router
     .route('/login')
@@ -36,38 +42,11 @@ router
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
-    .post(
-        [
-            check('password', 'password more than 6 degits').isLength({
-                min: 6,
-            }),
-            check('email').custom(async value => {
-                await knex('users')
-                    .where({ email: value })
-                    .select('email')
-                    .then(result => {
-                        if (result.length !== 0) {
-                            throw new Error('Email is already in use');
-                        } else {
-                            return true;
-                        }
-                    });
-            }),
-            check('confirmpassword').custom((value, { req }) => {
-                if (value !== req.body.password) {
-                    throw new Error('Confirmpassword does not match ');
-                } else {
-                    return true;
-                }
-            }),
-        ],
-        registerMethod,
-    );
+    .post(validatorRegister, registerMethod);
 //logout
 router.post('/logout', logoutMethod);
-
+//USER
 //view user
-
 router.route('/users/:id').get(verifyAuthentication, userView);
 
 // edit user
@@ -76,4 +55,16 @@ router.route('/edit/:id').put(verifyAuthentication, userEdit);
 //delete user
 router.route('/delete/:id').delete(verifyAuthentication, userDelete);
 
+// PRODUCT
+//view products table
+router
+    .route('/products')
+    .get(verifyAuthentication, productsRender)
+//add product type
+router.route('/addProductType').get(verifyAuthentication, productsRender).post(verifyAuthentication, productTypeMethod)
+// edit product type
+router.route('/editProductType/:id').put(verifyAuthentication, productTypeEdit);
+
+//delete product type
+router.route('/deleteProductType/:id').delete(verifyAuthentication, productTypeDelete);
 module.exports = router;
