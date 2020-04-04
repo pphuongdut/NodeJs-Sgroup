@@ -1,7 +1,6 @@
-<div class="sideMenu pl-3 pt-1 bg-transparent text-dark rounded col-2 text-uppercase ">
+<div class="sideMenu pl-4 vh-100 bg-transprarent text-dark  col-2 text-uppercase ">
     <div class="sidebar">
         <ul class="navbar-nav ">
-
             <li class="nav-item ">
                 <!-- admin --> <% if(usernow) { %>
                 <div class="pt-5">
@@ -10,9 +9,10 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user pr-2 "> </i> <a class=""> <%= usernow.fullname %> </a>
                         </button>
-                        <form class="dropdown-menu align-item-center pl-4 " aria-labelledby="dropdownMenuButton" action="/logout" method="POST">
+                        <form class="dropdown-menu align-item-center pl-4 " aria-labelledby="dropdownMenuButton"
+                            action="/logout" method="POST">
                             <button class="btn btn-sm ">
-                            <i class="fa fa-sign-out pr-1"></i> Log out
+                                <i class="fa fa-sign-out pr-1"></i> Log out
                             </button></form>
                     </div><% } %>
                 </div>
@@ -37,8 +37,8 @@
                         role="button" aria-expanded="false">
                         <i class="fa fa-sign-in pr-1"></i><span class="text "> Login</span>
                     </a>
-                    <a class="nav-link btn text-info text-decoration-none  text-left" href="/register" method="POST" role="button"
-                        aria-expanded="false">
+                    <a class="nav-link btn text-info text-decoration-none  text-left" href="/register" method="POST"
+                        role="button" aria-expanded="false">
                         <i class="fa fa-key pr-1"></i><span class="text "> Register</span>
                     </a>
                 </div>
@@ -52,20 +52,20 @@
                     </a>
                 </a>
                 <div class="collapse pl-3" id="collapseExample2">
-                    <a class="nav-link btn text-secondary text-decoration-none text-left" href="/users "
-                        method="POST" role="button" aria-expanded="false">
+                    <a class="nav-link btn text-secondary text-decoration-none text-left" href="/users " method="POST"
+                        role="button" aria-expanded="false">
                         <i class="fa fa-user pr-1"></i><span class="text"> Users </span>
                     </a>
-                    <a class="nav-link btn text-secondary text-decoration-none  text-left" href="/products " method="POST" role="button"
-                        aria-expanded="false">
+                    <a class="nav-link btn text-secondary text-decoration-none  text-left" href="/products "
+                        method="POST" role="button" aria-expanded="false">
                         <i class="fa fa-shopping-cart pr-1"></i><span class="text"> Products </span>
                     </a>
                 </div>
 
             </li>
             <li class="nav-item list-unstyled">
-                <a href="#" class="nav-link">
-                    <a class="btn text-decoration-none text-danger d-flex flex-row" data-toggle="collapse" href="#"
+                <a  class="nav-link">
+                    <a class="btn text-decoration-none text-danger d-flex flex-row" data-toggle="collapse" href="https://developers.google.com/chart?hl=vi"
                         role="button" aria-expanded="false">
                         <i class="fa fa-database pr-1"></i>
                         <span class="text ">Charts</span>
@@ -73,8 +73,8 @@
                 </a>
             </li>
             <li class="nav-item list-unstyled">
-                <a href="#" class="nav-link">
-                    <a class="btn text-decoration-none text-info d-flex flex-row" data-toggle="collapse" href="#"
+                <aclass="nav-link">
+                    <a class="btn text-decoration-none text-info d-flex flex-row" data-toggle="collapse"  href="https://support.google.com/accounts/answer/3118621?hl=vi" 
                         role="button" aria-expanded="false">
                         <i class="fa fa-cog pr-1"></i>
                         <span class="text">Settings</span>
@@ -82,15 +82,24 @@
                 </a>
             </li>
             <li class="nav-item list-unstyled">
-                <a href="#" class="nav-link">
-                    <a class="btn text-decoration-none text-success d-flex flex-row" data-toggle="collapse" href="#"
+                <a 
+                    class="nav-link">
+                    <a class="btn text-decoration-none text-success d-flex flex-row" data-toggle="collapse" href="https://preview.themeforest.net/item/swift-university-dashboard-template-for-school-and-colleges/full_screen_preview/26150849?_ga=2.112819396.1153529105.1585838489-103845711.1585228706"
                         role="button" aria-expanded="false">
                         <i class="fa fa-tv pr-1"></i>
-                        <span class=" text">Demo </span>
+                        <span class=" text">Demo 1</span>
                     </a>
                 </a>
             </li>
-
+            <li class="nav-item list-unstyled">
+                <a  class="nav-link">
+                    <a class="btn text-decoration-none text-success d-flex flex-row" data-toggle="collapse" href="http://angular-material.fusetheme.com/apps/dashboards/analytics"
+                        role="button" aria-expanded="false">
+                        <i class="fa fa-tv pr-1"></i>
+                        <span class=" text">Demo 2 </span>
+                    </a>
+                </a>
+            </li>
         </ul>
     </div>
 

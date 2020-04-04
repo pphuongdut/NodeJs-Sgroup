@@ -3,8 +3,8 @@ const router = express.Router();
 const {
     verifynotAuthentication,
     verifyAuthentication,
-    validatorRegister,
 } = require('../app/Admin/Auth/Middlewares/Auth.middleware');
+const { validatorRegister } = require('../app/Admin/Auth/Validators/Validator');
 const {
     loginRender,
     registerRender,
@@ -23,8 +23,12 @@ const {
 const {
     productsRender,
     productTypeMethod,
+    productTypeRender,
     productTypeEdit,
-    productTypeDelete
+    productTypeDelete,
+    productMethod,
+    productEdit,
+    productDelete,
 } = require('../app/Admin/Products/Controllers/Products.controller');
 // users
 router.get('/users', verifyAuthentication, usersRender);
@@ -57,14 +61,31 @@ router.route('/delete/:id').delete(verifyAuthentication, userDelete);
 
 // PRODUCT
 //view products table
-router
-    .route('/products')
-    .get(verifyAuthentication, productsRender)
+router.route('/products').get(verifyAuthentication, productsRender);
 //add product type
-router.route('/addProductType').get(verifyAuthentication, productsRender).post(verifyAuthentication, productTypeMethod)
+router
+    .route('/product-type/add')
+    .get(verifyAuthentication, productsRender)
+    .post(verifyAuthentication, productTypeMethod);
+//view product type
+router.route('/product/:id').get(verifyAuthentication, productTypeRender);
 // edit product type
-router.route('/editProductType/:id').put(verifyAuthentication, productTypeEdit);
+router
+    .route('/product-type/:id/update')
+    .put(verifyAuthentication, productTypeEdit);
 
 //delete product type
-router.route('/deleteProductType/:id').delete(verifyAuthentication, productTypeDelete);
+router
+    .route('/product-type/:id/delete')
+    .delete(verifyAuthentication, productTypeDelete);
+//add product
+router
+    .route('/product/add')
+    .get(verifyAuthentication, productsRender)
+    .post(verifyAuthentication, productMethod);
+// edit product
+router.route('/product/:id/update').put(verifyAuthentication, productEdit);
+
+//delete product
+router.route('/product/:id/delete').delete(verifyAuthentication, productDelete);
 module.exports = router;

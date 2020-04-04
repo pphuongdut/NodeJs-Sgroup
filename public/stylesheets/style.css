@@ -1,8 +1,5 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
+    font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+    background-image: url('https://i.ytimg.com/vi/0L1vOo7h7zE/maxresdefault.jpg');
+    background-size: cover;
 }

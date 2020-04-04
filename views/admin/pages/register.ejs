@@ -11,42 +11,10 @@
 </head>
 
 <body class="p-0 mh-100 " data-spy="scroll">
-    <div class="container pt-2 ">
-        <div class="row ">
-            <div class="col-6">
-                <a class="navbar-brand float-left border border-info text-dark text-center" href="/"
-                    style="width: 120px;">
-                    <span class="font-weight-bold">Admin</span>LTE</a>
-            </div>
-            <div class="col-6">
-                <ul class="nav justify-content-end transparent ">
-
-                    <li class="nav-item">
-                        <a class="nav-link active text-decoration-none text-dark font-weight-bold" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-decoration-none text-secondary" href="#">Docs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-decoration-none text-secondary"
-                            href="https://dashboardpack.com/">Premium
-                            Templates</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-decoration-none text-secondary" href="#">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-decoration-none text-secondary" href="#">Subscribe</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-    <!-- end nav-bar  -->
-    <div class="container  pb-5">
-        <h3 class=" font-weight-bold"> Sign up </h3>
-        <p> Creat an account to continue </p>
+    
+    <% include ../partials/navbar %>
+    <div class="container  mb-5 w-50   bg-white shadow">
+        <h3 class=" font-weight-bold pt-3 text-center"> Sign up </h3>
                             <!-- if errors -->
                             <div class="w-50">
                                 <% if(errors) { %>
@@ -60,25 +28,25 @@
         <form class="pb-2" action="/register" method="POST">
             <div class="form-group d-lex">
                 <label for="fullname ">Fullname </label>
-                <input type="text" class="form-control w-50" id="fullname" name="fullname" placeholder="Full name"
+                <input type="text" class="form-control " id="fullname" name="fullname" placeholder="Full name"
                     required>
             </div>
             <div class="form-group d-lex">
                 <label for="username">User name</label>
-                <input type="text" class="form-control w-50" id="username" name="username" placeholder="User name"  required>
+                <input type="text" class="form-control " id="username" name="username" placeholder="User name"  required>
             </div>
             <div class="form-group d-lex">
                 <label for="email">Email </label>
-                <input type="email" class="form-control w-50" id="email" name="email" placeholder="Email"  required>
+                <input type="email" class="form-control " id="email" name="email" placeholder="Email"  required>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control w-50" id="password" name="password" placeholder="Password"  required>
+                <input type="password" class="form-control " id="password" name="password" placeholder="Password"  required>
             </div>
             <div class="form-group">
                 <label for="confirmpassword">Confirm password</label>
-                <input type="password" class="form-control w-50" id="confirmpassword" name="confirmpassword"
+                <input type="password" class="form-control " id="confirmpassword" name="confirmpassword"
                     placeholder="Confirm password"  required>
             </div>
             <button type="submit" class="btn btn-primary"> Sign up </button>
@@ -87,28 +55,7 @@
     </div>
 
 
-    <footer class="footer bg-dark text-white pb-0 fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-9 align-middle">
-                    Copyright © 2014-2019 <b><a href="/" class="text-white text-decoration-none">AdminLTE</a></b>.
-                    All rights reserved.
-                    <b><a href="/privacy" class="text-white text-decoration-none">Privacy Policy</a></b>
-                </div>
-                <div class="col-sm-3 text-center">
-                    <a href="https://twitter.com/colorlib" class="btn btn-twitter btn-social" data-toggle="tooltip"
-                        data-placement="top" title="" data-original-title="Twitter Account"><i
-                            class="fa fa-twitter text-white "></i></a>
-                    <a href="https://www.facebook.com/colorlib" class="btn btn-facebook btn-social"
-                        data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook Page"><i
-                            class="fa fa-facebook text-white"></i></a>
-                    <a href="https://github.com/ColorlibHQ" class="btn btn-github btn-social" data-toggle="tooltip"
-                        data-placement="top" title="" data-original-title="Github Repositories"><i
-                            class="fa fa-github text-white"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <% include ../partials/footer %>
 </body>
 
 </html>

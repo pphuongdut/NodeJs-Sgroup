@@ -20,14 +20,14 @@ const homepageRender = (req, res) => {
     const usernow = req.session.user;
     return res.render('admin/pages/index', {
         title: 'Home',
-        usernow:usernow,
+        usernow: usernow,
     });
 };
 const dashboardRender = (req, res) => {
     const usernow = req.session.user;
     return res.render('admin/pages/dashboard', {
         title: 'Dashboard',
-        usernow:usernow
+        usernow: usernow,
     });
 };
 //Method
@@ -57,7 +57,7 @@ const loginMethod = async (req, res) => {
         }
     } else {
         req.flash('error', 'Email is not exist');
-        console.log(errors.array())
+        console.log(errors.array());
         return res.render('admin/pages/login', {
             title: 'login',
             errors: errors.array(),
@@ -86,7 +86,7 @@ const registerMethod = async (req, res, next) => {
             password: hashedPassword,
         });
         //Success Message
-        req.flash('success', 'Log in now' );
+        req.flash('success', 'Log in now');
         return res.redirect('/login');
     }
 };
