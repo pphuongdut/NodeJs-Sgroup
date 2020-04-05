@@ -61,10 +61,10 @@ const productTypeRender = async (req, res) => {
         // .leftJoin('users', 'product_types.user_id', 'users.id')
         // .select(
         //     'product_types.id as product_type_id',
-        //     'users.id as user_id',
         //     'users.fullname',
         //     'product_type_name',
         // );
+        console.log(joinProductTypes)
     return res.render('admin/pages/product_type', {
         title: ' Product type',
         usernow: usernow,

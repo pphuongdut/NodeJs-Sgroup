@@ -3,8 +3,6 @@ exports.up = function(knex) {
         table
             .increments('id')
             .primary()
-            .onDelete('CASCADE')
-            .onUpdate('CASCADE');
         table.integer('user_id').unsigned();
         table
             .foreign('user_id')

@@ -40,8 +40,8 @@
                         <tbody>
                             <% product_types.forEach(product_type => { %>
                             <tr>
-                                <td><%= product_type.product_type_id %></td>
-                                <td><%= product_type.fullname %></td>
+                                <td><%= product_type.id %></td>
+                                <td><%= product_type.user_id %></td>
                                 <td><%= product_type.product_type_name %></td>
                                 <td class="text-primary">
                                     <%= moment(product_type.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
