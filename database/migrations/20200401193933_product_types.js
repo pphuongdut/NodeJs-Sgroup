@@ -1,11 +1,17 @@
 exports.up = function(knex) {
     return knex.schema.createTable('product_types', table => {
-        table.increments('id').primary();
-        table.integer('user_id').unsigned().unique;
+        table
+            .increments('id')
+            .primary()
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE');
+        table.integer('user_id').unsigned();
         table
             .foreign('user_id')
             .references('id')
-            .inTable('users');
+            .inTable('users')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE');
         table.string('product_type_name', 255).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table

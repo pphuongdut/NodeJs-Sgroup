@@ -1,19 +1,20 @@
-exports.up = function(knex) {
-    return knex.schema.createTable('products', table => {
+exports.up = function (knex) {
+    return knex.schema.createTable('products', (table) => {
         table.increments('id').primary();
-        table
-            .integer('product_type_id')
-            .unsigned()
-            .unique();
+        table.integer('product_type_id').unsigned();
         table
             .foreign('product_type_id')
             .references('id')
-            .inTable('product_types');
-        table.integer('user_id').unsigned().unique;
+            .inTable('product_types')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE');
+        table.integer('user_id').unsigned();
         table
             .foreign('user_id')
             .references('id')
-            .inTable('users');
+            .inTable('users')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE');
         table.string('product_name', 255).notNullable();
         table.string('product_description', 255).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -25,6 +26,6 @@ exports.up = function(knex) {
     });
 };
 
-exports.down = function(knex) {
-    return knex.schema.dropTable('products')
+exports.down = function (knex) {
+    return knex.schema.dropTable('products');
 };

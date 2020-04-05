@@ -45,21 +45,22 @@
                         <tbody>
                             <% product_types.forEach(product_type => { %>
                             <tr>
-                                <td><%= product_type.id %></td>
+                                <td><%= product_type.product_type_id %></td>
                                 <td><%= product_type.fullname %></td>
                                 <td><%= product_type.product_type_name %></td>
                                 <td class="text-primary">
                                     <%= moment(product_type.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
                                 <td class="text-primary">
                                     <%= moment(product_type.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
-                                <td> <a href="/product/<%= product_type.id %>" class="btn btn-success"> View
+                                <td> <a href="/product/<%= product_type.product_type_id %>" class="btn btn-success">
+                                        View
                                     </a></td>
                                 <td><button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#editModal<%= product_type.id %>">
+                                        data-target="#editModal<%= product_type.product_type_id %>">
                                         Edit
                                     </button></td>
                                 <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#deleteModal<%= product_type.id %>">
+                                        data-target="#deleteModal<%= product_type.product_type_id %>">
                                         Delete
                                     </button></td>
                             </tr>
@@ -100,8 +101,8 @@
                 </div>
                 <!--edit Modal -->
                 <% product_types.forEach(product_type => { %>
-                <form class="modal fade" id="editModal<%= product_type.id %>" role="form" method="POST"
-                    action="/product-type/<%= product_type.id %>/update" enctype="application/x-www-form-urlencoded">
+                <form class="modal fade" id="editModal<%= product_type.product_type_id %>" role="form" method="POST"
+                    action="/product-type/<%= product_type.product_type_id %>/update" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -128,8 +129,8 @@
                 <% }) %>
                 <!--delete Modal -->
                 <% product_types.forEach( product_type => { %>
-                <form class="modal fade" id="deleteModal<%= product_type.id %>" role="form" method="POST"
-                    action="/product-type/<%= product_type.id %>/delete" enctype="application/x-www-form-urlencoded">
+                <form class="modal fade" id="deleteModal<%= product_type.product_type_id %>" role="form" method="POST"
+                    action="/product-type/<%= product_type.product_type_id %>/delete" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -180,9 +181,9 @@
                             <tbody>
                                 <% products.forEach(product => { %>
                                 <tr>
-                                    <td><%= product.id %></td>
+                                    <td><%= product.product_id %></td>
                                     <td><%= product.fullname %></td>
-                                    <td><%= product.product_type_id %></td>
+                                    <td><%= product.product_type_name %></td>
                                     <td><%= product.product_name %></td>
                                     <td><%= product.product_description %></td>
                                     <td class="text-primary">
@@ -190,11 +191,11 @@
                                     <td class="text-primary">
                                         <%= moment(product.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
                                     <td><button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editProduct<%= product.id %>">
+                                            data-target="#editProduct<%= product.product_id %>">
                                             Edit
                                         </button></td>
                                     <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#deleteProduct<%= product.id %>">
+                                            data-target="#deleteProduct<%= product.product_id %>">
                                             Delete
                                         </button></td>
                                 </tr>
@@ -250,8 +251,8 @@
                 </div>
                 <!--edit Modal -->
                 <% products.forEach(product => { %>
-                <form class="modal fade" id="editProduct<%= product.id %>" role="form" method="POST"
-                    action="/product/<%= product.id %>/update" enctype="application/x-www-form-urlencoded">
+                <form class="modal fade" id="editProduct<%= product.product_id %>" role="form" method="POST"
+                    action="/product/<%= product.product_id %>/update" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -282,8 +283,8 @@
                 <% }) %>
                 <!--delete Modal -->
                 <% products.forEach( product => { %>
-                <form class="modal fade" id="deleteProduct<%= product.id %>" role="form" method="POST"
-                    action="/product/<%= product.id %>/delete" enctype="application/x-www-form-urlencoded">
+                <form class="modal fade" id="deleteProduct<%= product.product_id %>" role="form" method="POST"
+                    action="/product/<%= product.product_id %>/delete" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
