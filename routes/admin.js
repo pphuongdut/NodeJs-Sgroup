@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const multer = require('multer');
+
 const {
     verifynotAuthentication,
     verifyAuthentication,
@@ -22,14 +25,20 @@ const {
 } = require('../app/Admin/User/Controllers/User.controller');
 const {
     productsRender,
+    productMethod,
+    productEdit,
+    productDelete,
+    productUploadfile,
+} = require('../app/Admin/Products/Product/Controllers/Product.controller');
+const {
     productTypeMethod,
     productTypeRender,
     productTypeEdit,
     productTypeDelete,
-    productMethod,
-    productEdit,
-    productDelete,
-} = require('../app/Admin/Products/Controllers/Products.controller');
+} = require('../app/Admin/Products/Product_type/Controllers/Product_type.controller');
+const {
+    uploadFile,
+} = require('../app/Admin/Products/Product/Middlewares/Product.middleware');
 // users
 router.get('/users', verifyAuthentication, usersRender);
 //home
@@ -40,13 +49,13 @@ router.get('/dashboard', dashboardRender);
 router
     .route('/login')
     .get(verifynotAuthentication, loginRender)
-    .post(verifynotAuthentication, loginMethod);
+    .post(loginMethod);
 
 //register
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
-    .post(validatorRegister, registerMethod);
+    .post(registerMethod);
 //logout
 router.post('/logout', logoutMethod);
 //USER
@@ -85,7 +94,8 @@ router
     .post(verifyAuthentication, productMethod);
 // edit product
 router.route('/product/:id/update').put(verifyAuthentication, productEdit);
-
 //delete product
 router.route('/product/:id/delete').delete(verifyAuthentication, productDelete);
+router.route('/product/:id/add-img').post(uploadFile, productUploadfile);
+//upload.single('imgProduct')
 module.exports = router;

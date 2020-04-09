@@ -6,8 +6,6 @@ const { validationResult } = require('express-validator');
 const loginRender = (req, res) => {
     return res.render('admin/pages/Login', {
         title: 'Login',
-        errors: '',
-        messages: '',
     });
 };
 const registerRender = (req, res) => {
@@ -42,7 +40,7 @@ const loginMethod = async (req, res) => {
         .select('*')
         .first();
     if (user) {
-        var result = bcrypt.compareSync(password, user.password);
+        var result = bcrypt.compare(password, user.password);
         if (!result) {
             req.flash('error', 'Wrong password');
             return res.render('admin/pages/login', {
@@ -69,14 +67,16 @@ const loginMethod = async (req, res) => {
 const registerMethod = async (req, res, next) => {
     const { email, password, fullname, username } = req.body;
     console.log(validationResult(req));
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        console.log(errors.array());
-        return res.render('admin/pages/register', {
-            title: 'register',
-            errors: errors.array(),
-        });
-    } else {
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     console.log(errors.array());
+    //     console.log('dki lỗi')
+    //     return res.render('admin/pages/register', {
+    //         title: 'register',
+    //         errors: errors.array(),
+    //     });
+    // } else {
+        console.log('dki oke')
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         await knex('users').insert({
@@ -88,7 +88,7 @@ const registerMethod = async (req, res, next) => {
         //Success Message
         req.flash('success', 'Log in now' );
         return res.redirect('/login');
-    }
+//     }
 };
 const logoutMethod = async (req, res) => {
     req.session.destroy(function(err) {

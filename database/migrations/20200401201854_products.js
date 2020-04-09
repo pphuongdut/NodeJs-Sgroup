@@ -16,6 +16,7 @@ exports.up = function (knex) {
             .onDelete('CASCADE')
             .onUpdate('CASCADE');
         table.string('product_name', 255).notNullable();
+        table.string('img_src', 255).notNullable();
         table.string('product_description', 255).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table

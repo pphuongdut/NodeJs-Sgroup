@@ -13,34 +13,9 @@ const verifynotAuthentication = (req, res, next) => {
     }
     return res.redirect('/users');
 };
-// validator
-const validatorRegister = (req, res, next) => {
-    return [
-        check('password', 'password more than 6 degits').isLength({ min: 6 }),
-        check('email').custom(async value => {
-            await knex('users')
-                .where({ email: value })
-                .select('email')
-                .then(result => {
-                    if (result.length !== 0) {
-                        throw new Error('Email is already in use');
-                    } else {
-                        return true;
-                    }
-                });
-        }),
-        check('confirmpassword').custom((value, { req }) => {
-            if (value !== req.body.password) {
-                throw new Error('Confirmpassword does not match ');
-            } else {
-                return true;
-            }
-        }),
-    ];
-};
+
 
 module.exports = {
     verifyAuthentication,
     verifynotAuthentication,
-    validatorRegister,
 };
