@@ -51,7 +51,7 @@ const loginMethod = async (req, res) => {
         } else {
             req.session.user = user;
             console.log(user);
-            return res.redirect('/users');
+            return res.redirect('/admin/users');
         }
     } else {
         req.flash('error', 'Email is not exist');
@@ -87,7 +87,7 @@ const registerMethod = async (req, res, next) => {
         });
         //Success Message
         req.flash('success', 'Log in now' );
-        return res.redirect('/login');
+        return res.redirect('/admin/login');
 //     }
 };
 const logoutMethod = async (req, res) => {
@@ -95,7 +95,7 @@ const logoutMethod = async (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/login');
+            res.redirect('/admin/login');
         }
     });
 };

@@ -41,7 +41,7 @@
                 <!--edit Modal -->
                
                 <form class="modal fade" id="editModal<%= product_type.product_type_id %>" role="form" method="POST"
-                    action="/product-type/<%= product_type.product_type_id %>/update"
+                    action="/admin/product-type/<%= product_type.product_type_id %>/update"
                     enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -68,7 +68,7 @@
                 </form>
                 <!--delete Modal -->
                 <form class="modal fade" id="deleteModal<%= product_type.product_type_id %>" role="form" method="POST"
-                    action="/product-type/<%= product_type.product_type_id %>/delete"
+                    action="/admin/product-type/<%= product_type.product_type_id %>/delete"
                     enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -148,7 +148,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="/product/add" method="POST">
+                                <form action="/admin/product/add" method="POST">
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Product type name</label>
@@ -183,7 +183,7 @@
                 <!--edit Modal -->
                 <% products.forEach(product => { %>
                 <form class="modal fade" id="editProduct<%= product.product_id %>" role="form" method="POST"
-                    action="/product/<%= product.product_id %>/update" enctype="application/x-www-form-urlencoded">
+                    action="/admin/product/<%= product.product_id %>/update" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -213,7 +213,7 @@
                 </form>
                 <!--delete Modal -->
                 <form class="modal fade" id="deleteProduct<%= product.product_id %>" role="form" method="POST"
-                    action="/product/<%= product.product_id %>/delete" enctype="application/x-www-form-urlencoded">
+                    action="/admin/product/<%= product.product_id %>/delete" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

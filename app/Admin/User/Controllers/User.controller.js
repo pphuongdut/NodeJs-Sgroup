@@ -40,7 +40,7 @@ const userEdit = async (req, res) => {
             fullname: req.body.fullname,
             username: req.body.username,
         });
-    return res.redirect('/users');
+    return res.redirect('/admin/users');
 };
 
 const userDelete = async (req, res) => {
@@ -49,7 +49,7 @@ const userDelete = async (req, res) => {
             id: req.params.id,
         })
         .delete();
-    return res.redirect('/users');
+    return res.redirect('/admin/users');
 };
 module.exports = {
     usersRender,

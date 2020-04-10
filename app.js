@@ -4,14 +4,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const adminRouter = require('./routes/admin');
+const clientRouter = require('./routes/client');
 const mysql = require('mysql');
 const flash = require('connect-flash-plus');
 const app = express();
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const { sessionModules } = require('./config/session');
-var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -35,7 +34,8 @@ app.use(
 app.set('trust proxy', 1); // trust first proxy
 app.use(sessionModules);
 app.use(flash());
-app.use('/', adminRouter);
+app.use('/admin', adminRouter);
+app.use('/client', clientRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

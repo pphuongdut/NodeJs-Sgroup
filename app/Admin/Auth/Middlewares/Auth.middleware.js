@@ -5,13 +5,13 @@ const verifyAuthentication = (req, res, next) => {
     if (req.session.user) {
         return next();
     }
-    return res.redirect('/login');
+    return res.redirect('/admin/login');
 };
 const verifynotAuthentication = (req, res, next) => {
     if (!req.session.user) {
         return next();
     }
-    return res.redirect('/users');
+    return res.redirect('/admin/users');
 };
 
 

@@ -43,14 +43,14 @@ const productTypeMethod = async (req, res, next) => {
     console.log(onlyProductType);
     if (onlyProductType.length !== 0) {
         console.log('trùng tên');
-        return res.redirect('/products');
+        return res.redirect('/admin/products');
     }
     if (onlyProductType.length == 0) {
         await knex('product_types').insert({
             product_type_name: product_type_name,
             user_id: usernow.id,
         });
-        return res.redirect('/products');
+        return res.redirect('/admin/products');
     }
 };
 const productTypeEdit = async (req, res) => {
@@ -59,7 +59,7 @@ const productTypeEdit = async (req, res) => {
         .where({ product_type_name: product_type_name })
         .select('*');
     if (onlyProductType.length !== 0) {
-        return res.redirect('/products');
+        return res.redirect('/admin/products');
     }
     if (onlyProductType.length == 0) {
         await knex('product_types')
@@ -69,7 +69,7 @@ const productTypeEdit = async (req, res) => {
             .update({
                 product_type_name: product_type_name,
             });
-        return res.redirect('/products');
+        return res.redirect('/admin/products');
     }
 };
 const productTypeDelete = async (req, res) => {
@@ -79,7 +79,7 @@ const productTypeDelete = async (req, res) => {
         })
         .delete();
     console.log('deleted');
-    return res.redirect('/products');
+    return res.redirect('/admin/products');
 };
 module.exports = {
     productTypeMethod,

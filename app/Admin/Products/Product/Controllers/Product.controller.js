@@ -44,7 +44,7 @@ const productMethod = async (req, res, Promise) => {
         product_description: product_description,
         user_id: usernow.id,
     });
-    return res.redirect('/products');
+    return res.redirect('/admin/products');
 };
 
 const productEdit = async (req, res) => {
@@ -57,7 +57,7 @@ const productEdit = async (req, res) => {
             product_name: product_name,
             product_description: product_description,
         });
-    return res.redirect('/products');
+    return res.redirect('/admin/products');
 };
 const productDelete = async (req, res) => {
     console.log(req.params.id);
@@ -67,14 +67,14 @@ const productDelete = async (req, res) => {
         })
         .delete();
     console.log('delete ok');
-    return res.redirect('/products');
+    return res.redirect('/admin/products');
 };
 const productUploadfile = async (req, res) => {
     console.log(req.file);
     await knex('products').where({ id: req.params.id }).update({
         img_src: req.file.originalname,
     });
-    return res.redirect('/products');
+    return res.redirect('/admin/products');
 };
 module.exports = {
     productsRender,
