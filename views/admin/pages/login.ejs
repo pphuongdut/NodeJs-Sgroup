@@ -17,7 +17,7 @@
     <div class="container  p-4 mt-5 w-50   bg-white shadow">
         <h3 class=" font-weight-bold text-center"> Login </h3>
 
-        <form class=" py-3 " action="/login" method="POST">
+        <form class=" py-3 " action="/admin/login" method="POST">
             <div class="form-group ">
                 <label for="email">Email </label>
                 <input type="email" class="form-control " id="email" name="email" placeholder="Email">
@@ -31,7 +31,7 @@
 
             <button type="submit" class="btn btn-primary"> Log in </button>
         </form>
-        <a class="" href="/register"> Creat new account </a>
+        <a class="" href="/admin/register"> Creat new account </a>
     </div>
 
     <% include ../partials/footer %>

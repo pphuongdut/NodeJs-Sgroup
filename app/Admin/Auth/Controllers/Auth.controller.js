@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const knex = require('../../../../database/knex');
 const { validationResult } = require('express-validator');
-
+const slugify = require('slugify');
 // Render
 const loginRender = (req, res) => {
     return res.render('admin/pages/Login', {
@@ -18,14 +18,14 @@ const homepageRender = (req, res) => {
     const usernow = req.session.user;
     return res.render('admin/pages/index', {
         title: 'Home',
-        usernow:usernow,
+        usernow: usernow,
     });
 };
 const dashboardRender = (req, res) => {
     const usernow = req.session.user;
     return res.render('admin/pages/dashboard', {
         title: 'Dashboard',
-        usernow:usernow
+        usernow: usernow,
     });
 };
 //Method
@@ -55,7 +55,7 @@ const loginMethod = async (req, res) => {
         }
     } else {
         req.flash('error', 'Email is not exist');
-        console.log(errors.array())
+        console.log(errors.array());
         return res.render('admin/pages/login', {
             title: 'login',
             errors: errors.array(),
@@ -76,22 +76,23 @@ const registerMethod = async (req, res, next) => {
     //         errors: errors.array(),
     //     });
     // } else {
-        console.log('dki oke')
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        await knex('users').insert({
-            fullname: fullname,
-            username: username,
-            email: email,
-            password: hashedPassword,
-        });
-        //Success Message
-        req.flash('success', 'Log in now' );
-        return res.redirect('/admin/login');
-//     }
+    console.log('dki oke');
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    await knex('users').insert({
+        fullname: fullname,
+        username: username,
+        email: email,
+        password: hashedPassword,
+        user_slug: slugify(email),
+    });
+    //Success Message
+    req.flash('success', 'Log in now');
+    return res.redirect('/admin/login');
+    //     }
 };
 const logoutMethod = async (req, res) => {
-    req.session.destroy(function(err) {
+    req.session.destroy(function (err) {
         if (err) {
             console.log(err);
         } else {

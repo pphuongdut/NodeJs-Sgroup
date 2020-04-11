@@ -1,17 +1,18 @@
 const moment = require('moment');
 const knex = require('../../../../../database/knex');
+const slugify = require('slugify');
 const productTypeRender = async (req, res) => {
     const usernow = req.session.user;
     const joinProducts = await knex('products')
-        .where({
-            product_type_id: req.params.id,
-        })
         .leftJoin(
             'product_types',
             'products.product_type_id ',
             'product_types.id',
         )
         .leftJoin('users', 'products.user_id', 'users.id')
+        .where({
+            product_type_slug: req.params.id,
+        })
         .select(
             'product_type_name',
             'products.id as product_id',
@@ -22,7 +23,7 @@ const productTypeRender = async (req, res) => {
             'fullname',
         );
     const joinProductTypes = await knex('product_types')
-        .where({ id: req.params.id })
+        .where({ product_type_slug: req.params.id })
         .select('*');
     console.log(joinProductTypes);
     return res.render('admin/pages/product_type', {
@@ -49,6 +50,7 @@ const productTypeMethod = async (req, res, next) => {
         await knex('product_types').insert({
             product_type_name: product_type_name,
             user_id: usernow.id,
+            product_type_slug: slugify(product_type_name) + '-' + Date.now(),
         });
         return res.redirect('/admin/products');
     }

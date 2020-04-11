@@ -6,7 +6,7 @@ module.exports = {
         connection: {
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
-            database: 'test',
+            database: 'mydatabase',
         },
         migrations: {
             directory: __dirname + '/database/migrations',

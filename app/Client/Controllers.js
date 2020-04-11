@@ -7,10 +7,18 @@ const productsRender = async (req, res) => {
             'product_types.id',
         )
         .select('*');
-
-    console.log(products);
+    const products_clothes = await knex('products')
+        .leftJoin(
+            'product_types',
+            'products.product_type_id',
+            'product_types.id',
+        )
+        .where({ product_type_name: 'clothes' })
+        .select('*');
+    console.log(products_clothes);
     return res.render('client/products', {
-        products: products,
+        products,
+        products_clothes,
     });
 };
 module.exports = {

@@ -52,7 +52,8 @@
                                     <%= moment(product_type.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
                                 <td class="text-primary">
                                     <%= moment(product_type.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
-                                <td> <a href="/admin/product/<%= product_type.product_type_id %>" class="btn btn-success">
+                                <td> <a href="/admin/product/<%= product_type.product_type_slug %>"
+                                        class="btn btn-success">
                                         View
                                     </a></td>
                                 <td><button type="button" class="btn btn-primary" data-toggle="modal"
@@ -101,7 +102,7 @@
                 <!--edit Modal -->
                 <% product_types.forEach(product_type => { %>
                 <form class="modal fade" id="editModal<%= product_type.product_type_id %>" role="form" method="POST"
-                    action="/admin/product-type/<%= product_type.product_type_id %>/update"
+                    action="/admin/product-type/<%= product_type.product_type_slug %>/update"
                     enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -133,7 +134,7 @@
                 </form>
                 <!--delete Modal -->
                 <form class="modal fade" id="deleteModal<%= product_type.product_type_id %>" role="form" method="POST"
-                    action="/admin/product-type/<%= product_type.product_type_id %>/delete"
+                    action="/admin/product-type/<%= product_type.product_type_slug %>/delete"
                     enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -268,7 +269,8 @@
                 <!--edit Modal -->
                 <% products.forEach(product => { %>
                 <form class="modal fade" id="editProduct<%= product.product_id %>" role="form" method="POST"
-                    action="/admin/product/<%= product.product_id %>/update" enctype="application/x-www-form-urlencoded">
+                    action="/admin/product/<%= product.product_id %>/update"
+                    enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -306,7 +308,8 @@
                 </form>
                 <!--delete Modal -->
                 <form class="modal fade" id="deleteProduct<%= product.product_id %>" role="form" method="POST"
-                    action="/admin/product/<%= product.product_id %>/delete" enctype="application/x-www-form-urlencoded">
+                    action="/admin/product/<%= product.product_id %>/delete"
+                    enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

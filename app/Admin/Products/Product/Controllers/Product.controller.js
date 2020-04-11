@@ -17,6 +17,7 @@ const productsRender = async (req, res) => {
             'product_name',
             'product_description',
             'fullname',
+            'product_slug',
         );
     const joinProductTypes = await knex('product_types')
         .leftJoin('users', 'product_types.user_id', 'users.id')
@@ -24,6 +25,7 @@ const productsRender = async (req, res) => {
             'product_types.id as product_type_id',
             'fullname',
             'product_type_name',
+            'product_type_slug',
         );
     return res.render('admin/pages/products', {
         title: ' Products',
@@ -72,7 +74,7 @@ const productDelete = async (req, res) => {
 const productUploadfile = async (req, res) => {
     console.log(req.file);
     await knex('products').where({ id: req.params.id }).update({
-        img_src: req.file.originalname,
+        img_src: req.file.filename,
     });
     return res.redirect('/admin/products');
 };

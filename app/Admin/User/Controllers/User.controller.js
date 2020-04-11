@@ -20,7 +20,7 @@ const userView = async (req, res, Promise) => {
     const usernow = req.session.user;
     const user_view = await knex('users')
         .where({
-            id: req.params.id,
+            user_slug: req.params.id,
         })
         .select('*');
     console.log(user_view);
