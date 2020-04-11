@@ -50,7 +50,7 @@ router.get('/dashboard', dashboardRender);
 router
     .route('/login')
     .get(verifynotAuthentication, loginRender)
-    .post(validatorLogin, loginMethod);
+    .post( loginMethod);
 
 //register
 router

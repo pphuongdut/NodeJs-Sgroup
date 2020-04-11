@@ -41,9 +41,8 @@ const loginMethod = async (req, res, Promise) => {
         .first();
     console.log(user);
     if (user) {
-        const result = bcrypt.compare(password, user.password);
+        const result = await bcrypt.compare(password, user.password);
         console.log(result);
-        console.log(bcrypt.compare(password, user.password));
         if (!result) {
             req.flash('errors', {
                 param: 'password',
