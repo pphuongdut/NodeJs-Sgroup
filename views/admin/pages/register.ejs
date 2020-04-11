@@ -15,17 +15,18 @@
     <% include ../partials/navbar %>
     <div class="container  mb-5 w-50   bg-white shadow">
         <h3 class=" font-weight-bold pt-3 text-center"> Sign up </h3>
-        <!-- if errors -->
-        <div class="w-50">
-            <% if(errors) { %>
-            <% errors.forEach( error => { %>
-            <p class="alert alert-danger">
-                <%= error.msg %>
-            </p>
-            <% }) %>
-            <% } %>
-        </div>
+
         <form class="pb-2" action="/admin/register" method="POST">
+            <div class="w-100">
+                <% if(errors) { %>
+                <% errors.forEach( error => { %>
+                <p class="alert alert-danger">
+                    <%= error.msg %> 
+                </p>
+                <% }) %>
+                <% } %>
+            </div>
+
             <div class="form-group d-lex">
                 <label for="fullname ">Fullname </label>
                 <input type="text" class="form-control " id="fullname" name="fullname" placeholder="Full name" required>
@@ -36,16 +37,19 @@
             </div>
             <div class="form-group d-lex">
                 <label for="email">Email </label>
+                <p class="text-danger error-field" data-location="email"></p>
                 <input type="email" class="form-control " id="email" name="email" placeholder="Email" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
+                <p class="text-danger error-field" data-location="password"></p>
                 <input type="password" class="form-control " id="password" name="password" placeholder="Password"
                     required>
             </div>
             <div class="form-group">
                 <label for="confirmpassword">Confirm password</label>
+                <p class="text-danger error-field" data-location="confirmpassword"></p>
                 <input type="password" class="form-control " id="confirmpassword" name="confirmpassword"
                     placeholder="Confirm password" required>
             </div>
@@ -57,5 +61,19 @@
 
     <% include ../partials/footer %>
 </body>
+<!-- <script>
+    $(document).ready(function () {
+        if (errors.length > 0) {
+            const elements = document.querySelectorAll('.error-field');
+            for (let i = 0; i < elements.length; i++) {
+                for (let j = 0; j < errors.length; j++) {
+                    if (elements[i].dataset.location === errors[j].param) {
+                        elements[i].innerHTML = errors[j].msg;
+                    }
+                }
+            }
+        }
+    });
+</script> -->
 
 </html>

@@ -16,17 +16,28 @@
     <!-- end nav-bar  -->
     <div class="container  p-4 mt-5 w-50   bg-white shadow">
         <h3 class=" font-weight-bold text-center"> Login </h3>
-
+        <div class="w-100">
+            <% if(errors) { %>
+            <% errors.forEach( error => { %>
+            <p class="alert alert-danger">
+                <%= error.msg %>
+            </p>
+            <% }) %>
+            <% } %>
+        </div>
         <form class=" py-3 " action="/admin/login" method="POST">
             <div class="form-group ">
                 <label for="email">Email </label>
-                <input type="email" class="form-control " id="email" name="email" placeholder="Email">
+                <p class="text-danger error-field" data-location="email"></p>
+                <input type="email" class="form-control " id="email" name="email" placeholder="Email" required>
             </div>
 
             <div class="form-group">
 
                 <label for="password">Password</label>
-                <input type="password" class="form-control " id="password" name="password" placeholder="Password">
+                <p class="text-danger error-field" data-location="password"></p>
+                <input type="password" class="form-control " id="password" name="password" placeholder="Password"
+                    required>
             </div>
 
             <button type="submit" class="btn btn-primary"> Log in </button>
@@ -36,5 +47,20 @@
 
     <% include ../partials/footer %>
 </body>
+<!-- <script>
+    const errors = <% -JSON.stringify(errors) %>;
+    $(document).ready(function () {
+        if (errors.length > 0) {
+            const elements = document.getElementsByClassName("error-field");
+            for (let i = 0; i < elements.length; i++) {
+                for (let j = 0; j < errors.length; j++) {
+                    if (elements[i].dataset.location === errors[j].param) {
+                        elements[i].innerHTML = errors[j].msg;
+                    }
+                }
+            }
+        }
+    });
+</script> -->
 
 </html>

@@ -124,7 +124,7 @@
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100  " style="height: 100vh ;"
-                            src="https://lh3.googleusercontent.com/proxy/SGHITZIymn1CYnrz4Va5ILYf_tgX_frEyxZQbnbFbdryojF3ZnJ8dEKU_mgHfbxovcv39wR3FYTXRUFFkmQK5SH7_kxP7N4fImLVGpK1o7dCYNaDMTYUqNio6mwj5SL9ZrA"
+                            src="https://i.pinimg.com/originals/fd/a6/5a/fda65a6fcf2671eb44359aa5ddd6f5b2.jpg"
                             alt="Third slide">
                         <div class="carousel-caption d-none d-md-block">
                             <a style="font-family: 'Raleway', sans-serif;"> Sweet Hamburger </a>
@@ -144,22 +144,20 @@
         <!-- end sile macaron -->
         <div class="container py-5">
             <div class="container d-flex flex-column ml-3 my-4 align-items-center ">
-                <h1 style="font-size: 50 px;font-family: 'Raleway', sans-serif;" class="text-uppercase mt-3"> All products
+                <h1 style="font-size: 50 px;font-family: 'Raleway', sans-serif;" class="text-uppercase mt-3"> All
+                    products
                 </h1>
                 <a style="font-family: 'Quicksand', sans-serif;" class="py-4"> A life of fashion </a>
                 <a style="font-family: 'Raleway', sans-serif; padding-left: 80px;padding-right:80px;">
-                    When it comes to clothing, make your own rules. From big nights out, to long days in front of the
-                    sofa, level up
-                    your
-                    look for any occasion. Browse the full range Discover the latest women's clothing collection from
-                    Missguided.
-                    Whether
-                    you're on the hunt for work wear, party outfits, gym clothes or holiday attire. We got you covered
-                    babe. Keep an eye
-                    on
-                    our clothing range for brand new collaborations and celebrity collections. From plus size clothing
-                    to petite, find
-                    clothes to suit every type and size of girl. Level up your wardrobe. Go go go. </a>
+                    After freezing for years in regular stockings and leggings, and tired of uncomfortable, itchy wool
+                    tights, designer
+                    Jennifer Kim realized women needed a fresh approach to staying warm and stylish in the cold. She
+                    created Plush tights, a
+                    hosiery line offering an array of fleece-lined tights versatile enough to wear with skirts, as
+                    thermals, or on their own
+                    as sublimely soft leggings. Plush tights and leggings are cozy staples in every chic girl's
+                    wardrobe. See all Plush
+                    reviews </a>
             </div>
         </div>
         <!-- product -->
@@ -201,27 +199,31 @@
                 </div>
             </div>
             <hr>
-    <div class="container py-5">
-        <div class="container d-flex flex-column ml-3 my-4 align-items-center ">
-            <h1 style="font-size: 50 px;font-family: 'Raleway', sans-serif;" class="text-uppercase mt-3"> ABOUT
-                Clothing
-            </h1>
-            <a style="font-family: 'Quicksand', sans-serif;" class="py-4"> A life of fashion </a>
-            <a style="font-family: 'Raleway', sans-serif; padding-left: 80px;padding-right:80px;">
-                When it comes to clothing, make your own rules. From big nights out, to long days in front of the
-                sofa, level up
-                your
-                look for any occasion. Browse the full range Discover the latest women's clothing collection from
-                Missguided.
-                Whether
-                you're on the hunt for work wear, party outfits, gym clothes or holiday attire. We got you covered
-                babe. Keep an eye
-                on
-                our clothing range for brand new collaborations and celebrity collections. From plus size clothing
-                to petite, find
-                clothes to suit every type and size of girl. Level up your wardrobe. Go go go. </a>
-        </div>
-    </div>
+            <div class="container py-5">
+                <div class="container d-flex flex-column ml-3 my-4 align-items-center ">
+                    <h1 style="font-size: 50 px;font-family: 'Raleway', sans-serif;" class="text-uppercase mt-3"> ABOUT
+                        Clothing
+                    </h1>
+                    <a style="font-family: 'Quicksand', sans-serif;" class="py-4"> A life of fashion </a>
+                    <a style="font-family: 'Raleway', sans-serif; padding-left: 80px;padding-right:80px;">
+                        When it comes to clothing, make your own rules. From big nights out, to long days in front of
+                        the
+                        sofa, level up
+                        your
+                        look for any occasion. Browse the full range Discover the latest women's clothing collection
+                        from
+                        Missguided.
+                        Whether
+                        you're on the hunt for work wear, party outfits, gym clothes or holiday attire. We got you
+                        covered
+                        babe. Keep an eye
+                        on
+                        our clothing range for brand new collaborations and celebrity collections. From plus size
+                        clothing
+                        to petite, find
+                        clothes to suit every type and size of girl. Level up your wardrobe. Go go go. </a>
+                </div>
+            </div>
             <div class="container">
 
                 <div class="row justify-content-center">
@@ -239,11 +241,17 @@
                                     </li>
                                     <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
-                                <a href="#" class="select-options"><i class="fa fa-arrow-right"></i> Select Options</a>
+                                <a href="#" class="select-options"><i class="fa fa-arrow-right"></i>  Add to Bag </a>
                             </div>
-                            <div class="product-content">
-                                <h3 class="title"><a href="#">Men's Sweat Shirt</a></h3>
-                                <div class="price">$11.00 - $15.00</div>
+                            <div class="product-content d-flex flex-column">
+                                <h3 class="title text-uppercase"><a href="#"><%= product.product_name %></a></h3>
+                                <a style="font-family: 'Quicksand', sans-serif;">Type: <%= product.product_type_name	 %>
+                                </a>
+                                <a style="font-family: 'Quicksand', sans-serif;">Desciption:
+                                    <%= product.product_description	 %> </a>
+                                <div class="price">
+                                    $14.40
+                                </div>
                             </div>
                         </div>
                     </div> <% }) %>

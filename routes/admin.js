@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-
+const { check } = require('express-validator');
 const {
     verifynotAuthentication,
     verifyAuthentication,
 } = require('../app/Admin/Auth/Middlewares/Auth.middleware');
-const { validatorRegister } = require('../app/Admin/Auth/Validators/Validator');
+const {
+    validatorRegister,
+    validatorLogin,
+} = require('../app/Admin/Auth/Validators/Validator');
 const {
     loginRender,
     registerRender,
@@ -47,13 +50,13 @@ router.get('/dashboard', dashboardRender);
 router
     .route('/login')
     .get(verifynotAuthentication, loginRender)
-    .post(loginMethod);
+    .post(validatorLogin, loginMethod);
 
 //register
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
-    .post(registerMethod);
+    .post(validatorRegister,registerMethod);
 //logout
 router.post('/logout', logoutMethod);
 //USER
