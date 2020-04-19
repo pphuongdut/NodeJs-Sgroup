@@ -13,3 +13,5 @@ module.exports = {
         },
     },
 };
+// cái nớ em đang viết lở dở thì hắn bị bug,anh sửa được cái mysql chưa, comment cai e dang code lại r chay thu router khac a xem 
+//delete giup a node_module

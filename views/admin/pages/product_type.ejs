@@ -21,25 +21,69 @@
             <!-- end sideMenu-->
             <!-- product types -->
             <div class="col-10 " id="">
-                <div class="container pt-5 d-flex"> <% product_types.forEach(product_type => { %>
+                <div class="container pt-5 d-flex">
+                    <% product_types.forEach(product_type => { %>
                     <h5 class="pr-3 font-weight-bold text-uppercase"> Product types :
                         <%= product_type.product_type_name %></h5>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#editModal<%= product_type.product_type_id %>">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-danger ml-3" data-toggle="modal"
-                            data-target="#deleteModal<%= product_type.product_type_id %>">
-                            Delete
-                        </button>
-                            <button type="button" class="btn btn-warning ml-3" data-toggle="modal" data-target="#addProduct">
-                                Add Product
-                            </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#editModal<%= product_type.product_type_id %>">
+                        Edit
+                    </button>
+                    <button type="button" class="btn btn-danger ml-3" data-toggle="modal"
+                        data-target="#deleteModal<%= product_type.product_type_id %>">
+                        Delete
+                    </button>
+                    <button type="button" class="btn btn-warning ml-3" data-toggle="modal" data-target="#addProduct">
+                        Add Product
+                    </button>
+                    <!--add product Modal -->
+                    <div class="modal fade" id="addProduct" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Product </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/admin/product/add" method="POST">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Product type name</label>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">Example select</label>
+                                                    <select class="form-control mdb-select md-form"
+                                                        name="product_type_id" id="exampleFormControlSelect1">
+                                                        <option><%= product_type.product_type_name %> </option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Product name</label>
+                                                <input type="text" class="form-control" name="product_name"
+                                                    placeholder="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Product description</label>
+                                                <input type="text" class="form-control" name="product_description"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Add Product </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            
-               
+
+
                 <!--edit Modal -->
-               
                 <form class="modal fade" id="editModal<%= product_type.product_type_id %>" role="form" method="POST"
                     action="/admin/product-type/<%= product_type.product_type_id %>/update"
                     enctype="application/x-www-form-urlencoded">
@@ -106,8 +150,10 @@
                                     <th scope='col'>Product description </th>
                                     <th scope='col'>Creat at</th>
                                     <th scope='col'>Update at</th>
+                                    <th scope='col'>View</th>
                                     <th scope='col'>Edit</th>
                                     <th scope='col'>Delete</th>
+                                    <th scope='col'>Add IMG</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,6 +168,10 @@
                                         <%= moment(product.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
                                     <td class="text-primary">
                                         <%= moment(product.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                                    <td><button type="button" class="btn btn-primary" method="GET"
+                                            action="/admin/product/<%= product.product_slug%>">
+                                            View
+                                        </button></td>
                                     <td><button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#editProduct<%= product.product_id %>">
                                             Edit
@@ -130,60 +180,21 @@
                                             data-target="#deleteProduct<%= product.product_id %>">
                                             Delete
                                         </button></td>
+                                    <td><button type="button" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#addImg<%= product.product_id %>">
+                                            Add
+                                        </button></td>
                                 </tr>
                                 <% }) %>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <!--add product Modal -->
-                <div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Product </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/admin/product/add" method="POST">
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Product type name</label>
-                                            <div class="form-group">
-                                                <label for="exampleFormControlSelect1">Example select</label>
-                                                <select class="form-control mdb-select md-form" name="product_type_id"
-                                                    id="exampleFormControlSelect1">
-                                                    <% product_types.forEach(product_type => { %>
-                                                    <option><%= product_type.product_type_name %> </option>
-                                                    <% }) %>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Product name</label>
-                                            <input type="text" class="form-control" name="product_name" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Product description</label>
-                                            <input type="text" class="form-control" name="product_description"
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Add Product </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!--edit Modal -->
                 <% products.forEach(product => { %>
                 <form class="modal fade" id="editProduct<%= product.product_id %>" role="form" method="POST"
-                    action="/admin/product/<%= product.product_id %>/update" enctype="application/x-www-form-urlencoded">
+                    action="/admin/product/<%= product.product_slug %>/update"
+                    enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -195,11 +206,13 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail2">product name</label>
-                                            <input type="text" class="form-control" name="product_name">
+                                            <input value="<%= product.product_name %>" type="text" class="form-control"
+                                                name="product_name">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail2">product description</label>
-                                            <input type="text" class="form-control" name="product_description">
+                                            <input value="<%= product.product_description %>" type="text"
+                                                class="form-control" name="product_description">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -213,7 +226,8 @@
                 </form>
                 <!--delete Modal -->
                 <form class="modal fade" id="deleteProduct<%= product.product_id %>" role="form" method="POST"
-                    action="/admin/product/<%= product.product_id %>/delete" enctype="application/x-www-form-urlencoded">
+                    action="/admin/product/<%= product.product_slug %>/delete"
+                    enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -229,6 +243,29 @@
                                 <div class="modal-footer">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-primary">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- add img modal -->
+
+                <form class="modal fade" id="addImg<%= product.product_id %>" role="form" method="POST"
+                    action="/admin/product/<%= product.product_slug %>/add-img" enctype="multipart/form-data"
+                    enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add image</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box-body">
+                                    <input type="file" name="imgProduct" />
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <button type="submit" class="btn btn-primary">Add image</button>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/scrolltop.css">
+    <title>Judo Store </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <% include ../partials/navbar %>>
+
+    <div class="mt-5 mr-3 ml-3 mb-5 container">
+        <!-- product -->
+        <div class="row py-5">
+            <div class="col-3"></div>
+            <div class="col-5">
+                <div class="container ">
+                    <div class="row justify-content-center">
+                        <% products.forEach(product => { %>
+                        <div class="col ">
+                            <div class="product-grid5">
+                                <div class="product-image5">
+                                    <a href="#">
+                                        <img class="pic-1" src="/<%= product.img_src %>">
+                                        <img class="pic-2 easyzoom easyzoom--overlay" src="/<%= product.img_src %>">
+                                    </a>
+                                    <ul class="social">
+                                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a>
+                                        </li>
+                                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a href="#" class="select-options"><i class="fa fa-arrow-right"></i> Add to Bag </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="product-grid5">
+                    <div class="product-content d-flex flex-column" style="line-height: 3;">
+                        <h3 class="title text-uppercase"><a href="#"><%= product.product_name %></a></h3>
+                        <a style="font-family: 'Quicksand', sans-serif;">Desciption:
+                            <%= product.product_description	 %> </a>
+                        <div class="price">
+                            $14.40
+                        </div>
+                    </div>
+                </div>
+                <div class="w-50">
+                    <div class="input-group ">
+                        <span class="input-group-btn">
+                            <button type="button" class="quantity-left-minus bg-light  btn btn-number  border"
+                                data-type="minus" data-field="">
+                                <span class="glyphicon glyphicon-minus text-danger"> - </span>
+                            </button>
+                        </span>
+                        <input type="text" id="quantity" name="quantity"
+                            class="form-control bg-light btn input-number border " value="1" min="1" max="100">
+
+                        <span class="input-group-btn">
+                            <button type="button" class="quantity-right-plus bg-light btn btn-number  border"
+                                data-type="plus" data-field="">
+                                <span class="glyphicon glyphicon-plus text-success"> + </span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <% if(usernow.roleId == 1) { %>
+               <div class="d-flex flex-row mt-3">
+                    <form action="/admin/product/<%=product.product_slug %>/delete/client" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn-dark btn"><i class="fa fa-trash"></i></button>
+                    </form>
+                    <button type="button" class="btn btn-dark ml-2" data-toggle="modal" data-target="#editProduct<%= product.product_id %>">
+                        <i class="fa fa-edit"></i>
+                    </button>
+               </div>
+                <form class="modal fade" id="editProduct<%= product.product_id %>" role="form" method="POST"
+                    action="/admin/product/<%= product.product_slug %>/update/client"
+                    enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit product</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail2">product name</label>
+                                            <input value="<%= product.product_name %>" type="text" class="form-control" name="product_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail2">product description</label>
+                                            <input value="<%= product.product_description %>" type="text" class="form-control" name="product_description">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+            </div>
+            <hr>
+            <% }) %>
+
+        </div>
+        <!-- end product -->
+    </div>
+    <!-- back to top -->
+    <a id="back2Top" title="Back to top" href="#">➤</a>
+    <!-- end back to top -->
+    <!-- Footer -->
+    <% include ../partials/footer %>
+    <!-- Footer -->
+    <script>
+        /*Scroll to top when arrow up clicked BEGIN*/
+        $(window).scroll(function () {
+            var height = $(window).scrollTop();
+            if (height > 100) {
+                $('#back2Top').fadeIn();
+            } else {
+                $('#back2Top').fadeOut();
+            }
+        });
+        $(document).ready(function () {
+            $('#back2Top').click(function (event) {
+                event.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            });
+        });
+/*Scroll to top when arrow up clicked END*/
+    </script>
+    <script type="text/javascript">
+        window.alert = function () { };
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css) {
+            if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
+        }
+        $(document).ready(function () {
+            var iframe_height = parseInt($('html').height());
+            window.parent.postMessage(iframe_height, 'https://bootsnipp.com');
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
+
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
+
+                // If is not undefined
+
+                $('#quantity').val(quantity + 1);
+
+
+                // Increment
+
+            });
+
+            $('.quantity-left-minus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
+
+                // If is not undefined
+
+                // Increment
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

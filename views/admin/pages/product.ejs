@@ -42,11 +42,9 @@
                                     <th scope='col'>Update at</th>
                                     <th scope='col'>Edit</th>
                                     <th scope='col'>Delete</th>
-                                    <th scope="col">IMG</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% products.forEach(product => { %>
                                 <tr>
                                     <td><%= product.product_id %></td>
                                     <td><%= product.fullname %></td>
@@ -65,68 +63,13 @@
                                             data-target="#deleteProduct<%= product.product_id %>">
                                             Delete
                                         </button></td>
-                                    <td>
-                                        <button type="button" class="btn btn-dark" data-toggle="modal"
-                                            data-target="#addImg<%= product.product_id %>">
-                                            Add
-                                        </button></td>
-
-                                    </td>
                                 </tr>
-                                <% }) %>
                             </tbody>
                         </table>
-                        <!--add product Modal -->
-                        <div class="modal fade" id="addProduct" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add Product </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/admin/product/add" method="POST">
-                                            <div class="box-body">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Product type name</label>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Example select</label>
-                                                        <select class="form-control mdb-select md-form"
-                                                            name="product_type_id" id="exampleFormControlSelect1">
-                                                            <% product_types.forEach(product_type => { %>
-                                                            <option value="<%= product_type.product_type_id %>">
-                                                                <%= product_type.product_type_name %> </option>
-                                                            <% }) %>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Product name</label>
-                                                    <input type="text" class="form-control" name="product_name"
-                                                        placeholder="" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Product description</label>
-                                                    <input type="text" class="form-control" name="product_description"
-                                                        placeholder="" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Add Product </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
                 <!--edit Modal -->
-                <% products.forEach(product => { %>
                 <form class="modal fade" id="editProduct<%= product.product_id %>" role="form" method="POST"
                     action="/admin/product/<%= product.product_slug %>/update"
                     enctype="application/x-www-form-urlencoded">
@@ -214,7 +157,6 @@
                         </div>
                     </div>
                 </form>
-                <% }); %>
             </div>
             <!-- ... -->
         </div>

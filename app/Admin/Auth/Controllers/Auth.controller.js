@@ -17,25 +17,32 @@ const registerRender = (req, res) => {
 };
 const homepageRender = (req, res) => {
     const usernow = req.session.user;
-    return res.render('admin/pages/index', {
-        title: 'Home',
-        usernow: usernow,
-    });
+    console.log(req.session.user.roleId);
+    if (req.session.user.roleId == 1) {
+        return res.render('admin/pages/index', {
+            title: 'Home',
+            usernow: usernow,
+        });
+    } else res.redirect('/JudoStore');
 };
 const dashboardRender = (req, res) => {
     const usernow = req.session.user;
-    return res.render('admin/pages/dashboard', {
-        title: 'Dashboard',
-        usernow: usernow,
-    });
+    if (req.session.user.roleId == 1) {
+        return res.render('admin/pages/dashboard', {
+            title: 'Dashboard',
+            usernow: usernow,
+        });
+    } else res.redirect('/JudoStore');
 };
 //Method
 const loginMethod = async (req, res, Promise) => {
     const errors = validationResult(req);
     const { email, password } = req.body;
     const user = await knex('users')
+        .leftJoin('role', 'users.roleId', 'role.role_id')
         .where({
             email: email,
+            role_name: 'admin',
         })
         .select('*')
         .first();
@@ -65,7 +72,7 @@ const loginMethod = async (req, res, Promise) => {
 };
 
 const registerMethod = async (req, res, Promise) => {
-    console.log('checked')
+    console.log('checked');
     const { email, password, fullname, username } = req.body;
     console.log(validationResult(req));
     const errors = validationResult(req);
@@ -92,6 +99,7 @@ const registerMethod = async (req, res, Promise) => {
             email: email,
             password: hashedPassword,
             user_slug: slugify(email),
+            roleId: '1',
         });
         return res.redirect('/admin/login');
     }
@@ -105,7 +113,11 @@ const logoutMethod = async (req, res) => {
         }
     });
 };
-
+const addRole = async (req, res) => {
+    await knex('role').insert({
+        role_name: req.body.role_name,
+    });
+};
 module.exports = {
     loginRender,
     registerRender,
@@ -114,4 +126,5 @@ module.exports = {
     loginMethod,
     registerMethod,
     logoutMethod,
+    addRole,
 };

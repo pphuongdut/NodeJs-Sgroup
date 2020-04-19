@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/stylesheets/login-register.css">
+    <link rel="stylesheet" href="/javascript/login-register.js">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+
+<body>
+    <div class="form-structor">
+        <form class="login" action="/login" method="POST">
+            <div class="center">
+                <h2 class="form-title" id="signup"><span>or</span>Log in</h2>
+                <div class="form-holder">
+                    <div class="w-100">
+                        <% if(errors) { %>
+                        <% errors.forEach( error => { %>
+                        <p class="alert alert-danger">
+                            <%= error.msg %>
+                        </p>
+                        <% }) %>
+                        <% } %>
+                    </div>
+                    <label for="email" class="label">Email </label>
+                    <p class="text-danger error-field" data-location="email"></p>
+                    <input type="email" class="input" id="email" name="email" placeholder="Email" required>
+                    <label for="password" class="label">Password</label>
+                    <p class="text-danger error-field" data-location="password"></p>
+                    <input type="password" class="input" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button class="submit-btn">Log in</button>
+                <a class="changeSignup" href="/register" id="login"><span>or</span> Sign up</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

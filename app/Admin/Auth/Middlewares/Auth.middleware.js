@@ -1,4 +1,3 @@
-const { check, validationResult } = require('express-validator');
 
 // check user to login
 const verifyAuthentication = (req, res, next) => {

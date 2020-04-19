@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/stylesheets/login-register.css">
+    <link rel="stylesheet" href="/javascript/login-register.js">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+
+<body>
+    <div class="form-structor">
+        <form class="signup" action="/register" method="POST">
+            <div class="center">
+                <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+                <div class="form-holder">
+                    <div class="w-100">
+                        <% if(errors) { %>
+                        <% errors.forEach( error => { %>
+                        <p class="alert alert-danger">
+                            <%= error.msg %>
+                        </p>
+                        <% }) %>
+                        <% } %>
+                    </div>
+                    <input type="text" class="input " id="fullname" name="fullname" placeholder="Full name" required>
+
+                    <input type="text" class="input" id="username" name="username" placeholder="User name" required>
+
+                    <p class="text-danger error-field" data-location="email"></p>
+                    <input type="email" class="input" id="email" name="email" placeholder="Email" required>
+
+                    <p class="text-danger error-field" data-location="password"></p>
+                    <input type="password" class="input" id="password" name="password" placeholder="Password" required>
+
+                    <p class="text-danger error-field" data-location="password"></p>
+                    <input type="password" class="input" id="confirmpassword" name="confirmpassword"
+                        placeholder="Confirm Password" required>
+                </div>
+                <button class="submit-btn">Sign up</button>
+                <a class="change" href="/login" id="login"><span>or</span> Log in</a>
+            </div>
+        </form>
+    </div>
+
+</html>

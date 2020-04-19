@@ -1,6 +1,24 @@
 const moment = require('moment');
 const knex = require('../../../../../database/knex');
 const slugify = require('slugify');
+const productTypesRender = async (req, res) => {
+    const usernow = req.session.user;
+    const joinProductTypes = await knex('product_types')
+        .leftJoin('users', 'product_types.user_id', 'users.id')
+        .select(
+            'product_types.id as product_type_id',
+            'fullname',
+            'product_type_name',
+            'product_type_slug',
+        );
+    return res.render('admin/pages/product_types', {
+        title: ' Product types',
+        usernow: usernow,
+        product_types: joinProductTypes,
+        moment,
+    });
+};
+
 const productTypeRender = async (req, res) => {
     const usernow = req.session.user;
     const joinProducts = await knex('products')
@@ -52,7 +70,7 @@ const productTypeMethod = async (req, res, next) => {
             user_id: usernow.id,
             product_type_slug: slugify(product_type_name) + '-' + Date.now(),
         });
-        return res.redirect('/admin/products');
+        return res.redirect('/admin/product-types');
     }
 };
 const productTypeEdit = async (req, res) => {
@@ -61,7 +79,7 @@ const productTypeEdit = async (req, res) => {
         .where({ product_type_name: product_type_name })
         .select('*');
     if (onlyProductType.length !== 0) {
-        return res.redirect('/admin/products');
+        return res.redirect('/admin/product-types');
     }
     if (onlyProductType.length == 0) {
         await knex('product_types')
@@ -71,7 +89,7 @@ const productTypeEdit = async (req, res) => {
             .update({
                 product_type_name: product_type_name,
             });
-        return res.redirect('/admin/products');
+        return res.redirect('/admin/product-types');
     }
 };
 const productTypeDelete = async (req, res) => {
@@ -81,11 +99,12 @@ const productTypeDelete = async (req, res) => {
         })
         .delete();
     console.log('deleted');
-    return res.redirect('/admin/products');
+    return res.redirect('/admin/product-types');
 };
 module.exports = {
     productTypeMethod,
     productTypeRender,
     productTypeEdit,
     productTypeDelete,
+    productTypesRender,
 };

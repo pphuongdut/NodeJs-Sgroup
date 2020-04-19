@@ -4,13 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const flash = require('connect-flash-plus');
-const app = express();
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const { sessionModules } = require('./config/session');
 
 const adminRouter = require('./routes/admin');
 const clientRouter = require('./routes/client');
+
+const PORT = process.env.PORT || 3000;
+const app = express();
+const http = require('http').Server(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -36,7 +39,7 @@ app.use(sessionModules);
 app.use(flash());
 
 app.use('/admin', adminRouter);
-app.use('/client', clientRouter);
+app.use('/', clientRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -52,5 +55,10 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+http.listen(PORT, () => {
+    console.log(`Server is running on Port ${PORT}`);
+});
+// -.- con j k êm , em chạy lại cái table nên hắn lỗi cái ni, còn cái route nớ lúc nó vẫn bth á a,  cothi em efile do vao 
 
 module.exports = app;

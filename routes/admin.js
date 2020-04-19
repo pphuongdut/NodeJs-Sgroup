@@ -6,6 +6,10 @@ const {
     verifyAuthentication,
 } = require('../app/Admin/Auth/Middlewares/Auth.middleware');
 const {
+    verifynotAuthorization,
+    verifyAuthorization,
+} = require('../app/Admin/Auth/Middlewares/Authorization.middleware');
+const {
     validatorRegister,
     validatorLogin,
 } = require('../app/Admin/Auth/Validators/Validator');
@@ -17,6 +21,7 @@ const {
     loginMethod,
     registerMethod,
     logoutMethod,
+    addRole,
 } = require('../app/Admin/Auth/Controllers/Auth.controller');
 const {
     usersRender,
@@ -27,12 +32,16 @@ const {
 const {
     productsRender,
     productMethod,
+    productRender,
     productEdit,
     productDelete,
     productUploadfile,
+    productDeleteClient,
+    productEditClient,
 } = require('../app/Admin/Products/Product/Controllers/Product.controller');
 const {
     productTypeMethod,
+    productTypesRender,
     productTypeRender,
     productTypeEdit,
     productTypeDelete,
@@ -41,22 +50,22 @@ const {
     uploadFile,
 } = require('../app/Admin/Products/Product/Middlewares/Product.middleware');
 // users
-router.get('/users', verifyAuthentication, usersRender);
+router.route('/users').get(verifyAuthentication, usersRender);
 //home
-router.get('/', homepageRender);
+router.route('/').get(homepageRender);
 //dashboard
 router.get('/dashboard', dashboardRender);
 //login
 router
     .route('/login')
     .get(verifynotAuthentication, loginRender)
-    .post( loginMethod);
+    .post(loginMethod);
 
 //register
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
-    .post(validatorRegister,registerMethod);
+    .post(registerMethod);
 //logout
 router.post('/logout', logoutMethod);
 //USER
@@ -72,13 +81,15 @@ router.route('/delete/:id').delete(verifyAuthentication, userDelete);
 // PRODUCT
 //view products table
 router.route('/products').get(verifyAuthentication, productsRender);
+//view product types table
+router.route('/product-types').get(verifyAuthentication, productTypesRender);
 //add product type
 router
     .route('/product-type/add')
     .get(verifyAuthentication, productsRender)
     .post(verifyAuthentication, productTypeMethod);
 //view product type
-router.route('/product/:id').get(verifyAuthentication, productTypeRender);
+router.route('/product-type/:id').get(verifyAuthentication, productTypeRender);
 // edit product type
 router
     .route('/product-type/:id/update')
@@ -88,15 +99,32 @@ router
 router
     .route('/product-type/:id/delete')
     .delete(verifyAuthentication, productTypeDelete);
+
+//view product
+router.route('/product/:id').get(verifyAuthentication, productRender);
+
 //add product
 router
     .route('/product/add')
     .get(verifyAuthentication, productsRender)
     .post(verifyAuthentication, productMethod);
 // edit product
-router.route('/product/:id/update').put(verifyAuthentication, productEdit);
+router
+    .route('/product/:id/update')
+    .put(verifyAuthentication, verifyAuthorization, productEdit);
+router
+    .route('/product/:id/update/client')
+    .put(verifyAuthentication, verifyAuthorization, productEditClient);
 //delete product
-router.route('/product/:id/delete').delete(verifyAuthentication, productDelete);
-router.route('/product/:id/add-img').post(uploadFile, productUploadfile);
+router
+    .route('/product/:id/delete')
+    .delete(verifyAuthentication, verifyAuthorization, productDelete);
+router
+    .route('/product/:id/delete/client')
+    .delete(verifyAuthentication, verifyAuthorization, productDeleteClient);
 //upload.single('imgProduct')
+router.route('/product/:id/add-img').post(uploadFile, productUploadfile);
+
+//route relate role
+router.route('/role/add').post(addRole);
 module.exports = router;

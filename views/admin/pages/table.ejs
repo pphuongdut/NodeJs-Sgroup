@@ -1,158 +1,157 @@
 <!DOCTYPE html>
-<footer>
 
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/public/stylesheets/style.css' />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    </head>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
 
-    <body class="p-0 mh-100 " data-spy="scroll">
-        <!-- navbar -->
-        <% include ../partials/navbar %>
-        <!-- end nav-bar  -->
+<body class="p-0 mh-100 " data-spy="scroll">
+    <!-- navbar -->
+    <% include ../partials/navbar %>
+    <!-- end nav-bar  -->
 
 
-        <div class="wrapper  d-flex  ">
-            <div class="row">
-                <!-- sideMenu -->
-                <% include ../partials/sideMenu %>
-                <!-- end sideMenu -->
-                <div class="col-10 " id="">
-                    <div class="container pt-5 d-flex">
-                        <h4 class="pr-3"> USERS </h4>
-                        <form class="pl-3" action="/admin/logout" method="POST"> <button
-                                class="btn btn-warning float-right">
-                                Log out
-                            </button></form>
-                    </div>
-                    <div class="container pt-5 pb-5 mb-5 ">
-                        <table class="table pt-2 pl-3 pr-3">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope='col'>User Name</th>
-                                    <th scope='col'>Full Name</th>
-                                    <th scope='col'>Email</th>
-                                    <th scope='col'>Creat at</th>
-                                    <th scope='col'>Update at</th>
-                                    <th scope='col'>View</th>
-                                    <th scope='col'>Edit</th>
-                                    <th scope='col'>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% users.forEach(user => { %>
-                                <tr>
-                                    <td><%= user.fullname %></td>
-                                    <td><%= user.username %></td>
-                                    <td><%= user.email %></td>
-                                    <td class="text-primary">
-                                        <%= moment(user.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
-                                    <td class="text-primary">
-                                        <%= moment(user.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
-                                    <td> <a href="/admin/users/<%=user.user_slug %>" class="btn btn-success"> view user
-                                        </a></td>
-                                    <td><button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editModal<%= user.id %>">
-                                            Edit user
-                                        </button></td>
-                                    <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#deleteModal<%= user.id %>">
-                                            Delete user
-                                        </button></td>
-                                </tr>
-                                <% }); %>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!--edit Modal -->
-                    <% users.forEach(user => { %>
-                    <form class="modal fade" id="editModal<%= user.id %>" role="form" method="POST"
-                        action="/admin/edit/<%= user.id %>" enctype="application/x-www-form-urlencoded">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit User</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="box-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Full name</label>
-                                                <input type="text" class="form-control" name="fullname" placeholder="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Username</label>
-                                                <input type="text" class="form-control" name="username">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input type="hidden" name="_method" value="PUT">
-                                            <button type="submit" class="btn btn-primary">Update</button>
-                                        </div>
-                                    </form>
-                                </div>
-
+    <div class="wrapper  d-flex  ">
+        <div class="row">
+            <!-- sideMenu -->
+            <% include ../partials/sideMenu %>
+            <!-- end sideMenu -->
+            <div class="col-10 " id="">
+                <div class="container pt-5 d-flex">
+                    <h4 class="pr-3"> USERS </h4>
+                    <form class="pl-3" action="/admin/logout" method="POST"> <button
+                            class="btn btn-warning float-right">
+                            Log out
+                        </button></form>
+                </div>
+                <div class="container pt-5 pb-5 mb-5 ">
+                    <table class="table pt-2 pl-3 pr-3">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope='col'>User Name</th>
+                                <th scope='col'>Full Name</th>
+                                <th scope='col'>Email</th>
+                                <th scope='col'>Creat at</th>
+                                <th scope='col'>Update at</th>
+                                <th scope='col'>View</th>
+                                <th scope='col'>Edit</th>
+                                <th scope='col'>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(user => { %>
+                            <tr>
+                                <td><%= user.fullname %></td>
+                                <td><%= user.username %></td>
+                                <td><%= user.email %></td>
+                                <td class="text-primary">
+                                    <%= moment(user.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                                <td class="text-primary">
+                                    <%= moment(user.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                                <td> <a href="/admin/users/<%=user.user_slug %>" class="btn btn-success"> view user
+                                    </a></td>
+                                <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#editModal<%= user.id %>">
+                                        Edit user
+                                    </button></td>
+                                <td><button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#deleteModal<%= user.id %>">
+                                        Delete user
+                                    </button></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <form action="/admin/role/add" method="POST">
+                    <form>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="role-name">Role name</label>
+                                <input type="text" class="form-control" id="role-name" name="role_name" placeholder="">
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="_method" value="POST">
+                            <button type="submit" class="btn btn-primary">Add Role</button>
+                        </div>
                     </form>
-                    <!--delete Modal -->
-                    <% users.forEach(user => { %>
-                    <form class="modal fade" id="deleteModal<%= user.id %>" role="form" method="POST"
-                        action="/admin/delete/<%= user.id %>" enctype="application/x-www-form-urlencoded">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Delete User</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body">
+                </form>
+
+                <!--edit Modal -->
+                <% users.forEach(user => { %>
+                <form class="modal fade" id="editModal<%= user.id %>" role="form" method="POST"
+                    action="/admin/edit/<%= user.id %>" enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit User</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Are you sure to delete this user ?</label>
+                                            <label for="exampleInputEmail1">Full name</label>
+                                            <input type="text" class="form-control" name="fullname" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Username</label>
+                                            <input type="text" class="form-control" name="username">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </div>
-                    </form>
-                </div>
-                <% }); %>
+                                </form>
+                            </div>
 
+                        </div>
+                    </div>
+                </form>
+                <!--delete Modal -->
+                <form class="modal fade" id="deleteModal<%= user.id %>" role="form" method="POST"
+                    action="/admin/delete/<%= user.id %>" enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Delete User</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Are you sure to delete this user ?</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </div>
+                </form>
+                <% }); %>
             </div>
 
         </div>
-        </div>
-        </div>
-        <% }); %>
-        </div>
 
-        </div>
-        </div>
+    </div>
 
+    <!-- /.container -->
 
-
-
-        <!-- /.container -->
-
-        <% include ../partials/footer %>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-    </body>
-
-</footer>
+    <% include ../partials/footer %>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>

@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "NestJS debug",
+        "type": "node",
+        "request": "launch",
+        "args": ["${workspaceFolder}/app.js"],
+        "sourceMaps": true,
+        "cwd": "${workspaceRoot}",
+        "protocol": "inspector",
+        // "env": {"NODE_ENV":"development"},
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  
