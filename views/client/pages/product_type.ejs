@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/scrolltop.css">
+    <title>Judo Store </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <% include ../partials/navbar %>>
+
+    <div class="mt-5 mr-3 ml-3 mb-5">
+
+
+        <!-- product -->
+        <div class="col py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <% products.forEach(product => { %>
+                    <div class="col-md-4 col-sm-6 " id="<%= product.product_type_name	%>">
+                        <div class="product-grid4">
+                            <div class="product-image4">
+                                <a href="#">
+                                    <img class="pic-1" src="/<%= product.img_src %>">
+                                    <img class="pic-2 easyzoom easyzoom--overlay" src="/<%= product.img_src %>">
+                                </a>
+                                <ul class="social">
+                                    <li><a href="/product/<%=product.product_slug %>" data-tip="Quick View"><i
+                                                class="fa fa-eye"></i></a></li>
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a>
+                                    </li>
+                                    <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+
+                                </ul>
+                                <span class="product-new-label"> New </span>
+                                <!-- <span class="product-discount-label">-10%</span> -->
+                            </div>
+                            <div class="product-content mt-4 d-flex flex-column">
+                                <h3 class="title text-uppercase"><a href="#"><%= product.product_name %></a></h3>
+                                <a style="font-family: 'Quicksand', sans-serif;">Type: <%= product.product_type_name	 %>
+                                </a>
+                                <a style="font-family: 'Quicksand', sans-serif;">Desciption:
+                                    <%= product.product_description	 %> </a>
+                                <div class="price">
+                                    $14.40
+                                    <span>$16.00</span>
+                                </div>
+                                <a class="add-to-cart" href="">ADD TO CART</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            <hr>
+            <div class="container py-5" id="#contact">
+                <div class="container d-flex flex-column ml-3 my-4 align-items-center ">
+                    <h1 style="font-size: 50 px;font-family: 'Raleway', sans-serif;" class="text-uppercase mt-3">
+                        Contact
+                    </h1>
+                    <a style="font-family: 'Quicksand', sans-serif;" class="py-4"> Follow us</a>
+                    <div class="d-flex flex-row pl-3">
+                        <i class="fa fa-facebook pr-3" aria-hidden="true"></i>
+                        <i class="fa fa-twitter pr-3" aria-hidden="true"></i>
+                        <i class="fa fa-instagram pr-3" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <!-- end product -->
+    </div>
+    <!-- back to top -->
+    <a id="back2Top" title="Back to top" href="#">➤</a>
+    <!-- end back to top -->
+    <!-- Footer -->
+    <% include ../partials/footer %>
+    <!-- Footer -->
+    <script>
+        /*Scroll to top when arrow up clicked BEGIN*/
+        $(window).scroll(function () {
+            var height = $(window).scrollTop();
+            if (height > 100) {
+                $('#back2Top').fadeIn();
+            } else {
+                $('#back2Top').fadeOut();
+            }
+        });
+        $(document).ready(function () {
+            $('#back2Top').click(function (event) {
+                event.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 'slow');
+                return false;
+            });
+        });
+/*Scroll to top when arrow up clicked END*/
+    </script>
+    <script type="text/javascript">
+        window.alert = function () { };
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css) {
+            if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
+        }
+        $(document).ready(function () {
+            var iframe_height = parseInt($('html').height());
+            window.parent.postMessage(iframe_height, 'https://bootsnipp.com');
+        });
+
+    </script>
+</body>
+
+</html>

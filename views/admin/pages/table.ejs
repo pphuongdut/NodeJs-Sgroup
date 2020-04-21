@@ -56,14 +56,15 @@
                                 <td> <a href="/admin/users/<%=user.user_slug %>" class="btn btn-success"> view user
                                     </a></td>
                                 <td><button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#editModal<%= user.id %>">
+                                        data-target="#editModal<%=user.id %>">
                                         Edit user
                                     </button></td>
                                 <td><button type="button" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#deleteModal<%= user.id %>">
+                                        data-target="#deleteModal<%=user.id %>">
                                         Delete user
                                     </button></td>
                             </tr>
+                            
                             <% }); %>
                         </tbody>
                     </table>
@@ -82,10 +83,9 @@
                         </div>
                     </form>
                 </form>
-
                 <!--edit Modal -->
                 <% users.forEach(user => { %>
-                <form class="modal fade" id="editModal<%= user.id %>" role="form" method="POST"
+                <form class="modal fade" id="editModal<%=user.id %>" role="form" method="POST"
                     action="/admin/edit/<%= user.id %>" enctype="application/x-www-form-urlencoded">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -98,11 +98,13 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Full name</label>
-                                            <input type="text" class="form-control" name="fullname" placeholder="">
+                                            <input value="<%= user.fullname %>" type="text" class="form-control"
+                                                name="fullname" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Username</label>
-                                            <input type="text" class="form-control" name="username">
+                                            <input value="<%= user.username %>" type="text" class="form-control"
+                                                name="username">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -114,7 +116,7 @@
 
                         </div>
                     </div>
-                </form>
+                </form>   
                 <!--delete Modal -->
                 <form class="modal fade" id="deleteModal<%= user.id %>" role="form" method="POST"
                     action="/admin/delete/<%= user.id %>" enctype="application/x-www-form-urlencoded">
@@ -127,24 +129,25 @@
                             <div class="modal-body">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Are you sure to delete this user ?</label>
+                                        <label for="exampleInputEmail1">Are you sure to delete
+                                            this user ?</label>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="btn btn-primary">Delete</button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 <% }); %>
             </div>
-
         </div>
-
     </div>
-
-    <!-- /.container -->
-
+    <!-- footer -->
     <% include ../partials/footer %>
+    <!-- end footer -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

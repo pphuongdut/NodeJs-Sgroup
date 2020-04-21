@@ -1,18 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const {
-    productsRender,
     loginRender,
     registerRender,
-    detailProductRender,
     loginMethod,
     registerMethod,
     logoutMethod,
-} = require('../app/Client/Controllers');
+} = require('../app/Client/User/Controllers');
+const {
+    productsRender,
+    detailProductRender,
+} = require('../app/Client/Products/Product/product.Controller');
+const {
+    detailProductTypeRender,
+} = require('../app/Client/Products/Product_type/product_type.Controller');
 const {
     verifynotAuthentication,
     verifyAuthentication,
-} = require('../app/Client/Middlewares');
+} = require('../app/Client/User/Middlewares');
 const {
     validatorRegister,
     validatorLogin,
@@ -33,7 +38,5 @@ router
 router.post('/logout', logoutMethod);
 //route relate product
 router.route('/product/:id').get(detailProductRender);
-//delete Product
-// router.route('/product/:id/delete').post(deleteProduct);
-// router.route('/product/:id/edit').post(editProduct);
+router.route('/product-type/:id').get(detailProductTypeRender);
 module.exports = router;

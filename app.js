@@ -59,6 +59,5 @@ app.use(function (err, req, res, next) {
 http.listen(PORT, () => {
     console.log(`Server is running on Port ${PORT}`);
 });
-// -.- con j k êm , em chạy lại cái table nên hắn lỗi cái ni, còn cái route nớ lúc nó vẫn bth á a,  cothi em efile do vao 
 
 module.exports = app;
