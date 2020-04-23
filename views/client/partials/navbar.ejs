@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm  fixed-top navbar-light bg-light">
+<nav class="navbar navbar-expand-sm  fixed-top navbar-light bg-light mb-5">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
                 <a class="nav-link ml-4 text-dark" href="/JudoStore">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ml-4 text-dark" href="#">BLog</a>
+                <a class="nav-link ml-4 text-dark" href="/posts">BLog</a>
             </li>
             <li class="nav-item dropdown dmenu ml-4">
                 <a class="nav-link dropdown-toggle text-dark" href="" id="navbardrop" data-toggle="dropdown">
@@ -33,7 +33,7 @@
         </ul>
         <div class="d-flex flex-row">
             <% if(usernow) { %>
-            <i class="fa fa-user  pr-2 pt-1"> </i> <a class="pr-3"> <%= usernow.username %> </a>
+            <i class="fa fa-user  pr-3 pt-1 "> </i> <a class="pr-3"> <%= usernow.username %> </a>
             <% } %>
             <form action="/logout" method="POST">
                 <button type="submit" class="btn-sm btn-dark"><i class="fa fa-sign-out"></i> </button>

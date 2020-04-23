@@ -38,6 +38,7 @@ const productsRender = async (req, res) => {
 };
 
 const productMethod = async (req, res, Promise) => {
+      console.log(req.file);
     const usernow = req.session.user;
     const { product_name, product_description, product_type_id } = req.body;
     console.log(req.body);
@@ -47,6 +48,7 @@ const productMethod = async (req, res, Promise) => {
         product_description: product_description,
         user_id: usernow.id,
         product_slug: slugify(product_name) + '-' + Date.now(),
+        // img_src: req.file.filename,
     });
     return res.redirect('/admin/products');
 };

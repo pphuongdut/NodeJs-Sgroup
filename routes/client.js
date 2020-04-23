@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const {
     loginRender,
     registerRender,
@@ -22,6 +23,15 @@ const {
     validatorRegister,
     validatorLogin,
 } = require('../app/Admin/Auth/Validators/Validator');
+const {
+    newPostMethod,
+    newPostRender,
+    postRender,
+    postDetailRender,
+} = require('../app/Client/Post/Post.Controller');
+const {
+    categoryDetailRender
+} = require('../app/Client/Categories/Category.Controller')
 // home render
 router.get('/JudoStore', productsRender);
 //login
@@ -39,4 +49,10 @@ router.post('/logout', logoutMethod);
 //route relate product
 router.route('/product/:id').get(detailProductRender);
 router.route('/product-type/:id').get(detailProductTypeRender);
+
+// POSTs & CATEGORIES
+router.route('/new-post').get(newPostRender).post(newPostMethod);
+router.route('/posts').get(postRender);
+router.route('/post/:id').get(postDetailRender);
+router.route('/category/:id').get(categoryDetailRender);
 module.exports = router;

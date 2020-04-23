@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { check } = require('express-validator');
 const {
     verifynotAuthentication,
     verifyAuthentication,
@@ -49,6 +48,14 @@ const {
 const {
     uploadFile,
 } = require('../app/Admin/Products/Product/Middlewares/Product.middleware');
+const {
+    categoryRender,
+    categoryMethod,
+    categoryEdit,
+    categoryDelete,
+    categoryDetailRender,
+} = require('../app/Admin/Categories/Category.controller');
+const postController = require('../app/Admin/Posts/Post.Controller');
 // users
 router.route('/users').get(verifyAuthentication, usersRender);
 //home
@@ -107,7 +114,7 @@ router.route('/product/:id').get(verifyAuthentication, productRender);
 router
     .route('/product/add')
     .get(verifyAuthentication, productsRender)
-    .post(verifyAuthentication, productMethod);
+    .post(verifyAuthentication, uploadFile.single('imgProduct'), productMethod);
 // edit product
 router
     .route('/product/:id/update')
@@ -122,9 +129,23 @@ router
 router
     .route('/product/:id/delete/client')
     .delete(verifyAuthentication, verifyAuthorization, productDeleteClient);
-//upload.single('imgProduct')
-router.route('/product/:id/add-img').post(uploadFile, productUploadfile);
+// upload.single('imgProduct')
+router
+    .route('/product/:id/add-img')
+    .post(uploadFile.single('imgProduct'), productUploadfile);
 
 //route relate role
 router.route('/role/add').post(addRole);
+
+// POSTS & CATEGORIES
+
+router.route('/categories').get(categoryRender).post(categoryMethod);
+router.route('/category/:id/').get(categoryDetailRender);
+router.route('/category/:id/delete').delete(categoryDelete);
+router.route('/category/:id/update').put(categoryEdit);
+
+router.route('/posts').get(postController.postRender);
+router.route('/post/:id').get(postController.postDetailRender);
+router.route('/post/:id/update').put(postController.postEdit);
+router.route('/post/:id/delete').delete(postController.postDelete);
 module.exports = router;

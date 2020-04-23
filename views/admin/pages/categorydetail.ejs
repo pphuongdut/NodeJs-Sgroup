@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body class="p-0 mh-100 " data-spy="scroll">
+    <!-- navbar -->
+    <% include ../partials/navbar %>
+    <!-- end nav-bar  -->
+    <div class="wrapper  d-flex  ">
+        <div class="row">
+            <!-- sideMenu -->
+            <% include ../partials/sideMenu %>
+            <!-- end sideMenu-->
+            <!-- post types -->
+            <div class="col-10 " id="">
+                <div class="container pt-5 d-flex">
+                    <% categories.forEach(category => { %>
+                    <h5 class="pr-3 font-weight-bold text-uppercase"> Category name :
+                        <%= category.category_name %></h5>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#editModal<%= category.category_id %>">
+                        Edit
+                    </button>
+                </div>
+                <!--edit Modal -->
+                <form class="modal fade" id="editModal<%= category.category_id %>" role="form" method="POST"
+                    action="/admin/category/<%= category.category_id %>/update"
+                    enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit category</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">category name</label>
+                                            <input type="text" class="form-control" name="category_name">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <% }); %>
+                <!-- end  -->
+                <!-- post-->
+                <div class="col-10 " id="">
+                    <div class="container pt-3 pb-5 mb-5">
+                        <table class="table pt-2 pl-3">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope='col'>Post ID</th>
+                                    <th scope='col'>User create</th>
+                                    <th scope='col'>Category </th>
+                                    <th scope='col'>Post title </th>
+                                    <th scope='col'>Creat at</th>
+                                    <th scope='col'>Update at</th>
+                                    <th scope='col'>View</th>
+                                    <th scope='col'>Edit</th>
+                                    <th scope='col'>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% posts.forEach(post => { %>
+                                <tr>
+                                    <td><%= post.post_id %></td>
+                                    <td><%= post.fullname %></td>
+                                    <td><%= post.category_name %></td>
+                                    <td><%= post.post_title %></td>
+                                    <td class="text-primary">
+                                        <%= moment(post.created_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                                    <td class="text-primary">
+                                        <%= moment(post.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></td>
+                                    <td><button type="button" class="btn btn-primary" method="GET"
+                                            action="/admin/post/<%= post.post_slug%>">
+                                            View
+                                        </button></td>
+                                    <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#editpost<%= post.post_id %>">
+                                            Edit
+                                        </button></td>
+                                    <td><button type="button" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#deletepost<%= post.post_id %>">
+                                            Delete
+                                        </button></td>
+
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--edit Modal -->
+                <% posts.forEach(post => { %>
+                <form class="modal fade" id="editpost<%= post.post_id %>" role="form" method="POST"
+                    action="/admin/post/<%= post.post_slug %>/update" enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit post</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail2">post title</label>
+                                            <textarea rows="3" cols="50" type="text" class="form-control"
+                                                name="post_title"><%- post.post_title %> </textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail2">post content</label>
+                                            <textarea id="new-post" name="post_content" rows="16"
+                                                cols="50"><%- post.post_content %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!--delete Modal -->
+                <form class="modal fade" id="deletepost<%= post.post_id %>" role="form" method="POST"
+                    action="/admin/post/<%= post.post_slug %>/delete" enctype="application/x-www-form-urlencoded">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Delete post </h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Are you sure to delete this post ?</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <% }); %>
+                <!-- /.container -->
+                <!-- end posts -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- footer -->
+    <% include ../partials/footer %>
+    <!-- end footer -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>

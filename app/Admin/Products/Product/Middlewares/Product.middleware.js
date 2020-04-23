@@ -8,6 +8,6 @@ let diskStorage = multer.diskStorage({
         callback(null, filename);
     },
 });
-let uploadFile = multer({ storage: diskStorage }).single('imgProduct');
+let uploadFile = multer({ storage: diskStorage });
 
 module.exports = { uploadFile };

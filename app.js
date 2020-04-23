@@ -23,7 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('serect'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(
     methodOverride((req, res) => {
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -37,7 +36,6 @@ app.use(
 app.set('trust proxy', 1); // trust first proxy
 app.use(sessionModules);
 app.use(flash());
-
 app.use('/admin', adminRouter);
 app.use('/', clientRouter);
 

@@ -38,6 +38,7 @@ const detailProductRender = async (req, res) => {
         usernow,
     });
 };
+
 module.exports = {
     productsRender,
     detailProductRender,
