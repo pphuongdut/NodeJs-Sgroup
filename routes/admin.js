@@ -56,80 +56,66 @@ const {
     categoryDetailRender,
 } = require('../app/Admin/Categories/Category.controller');
 const postController = require('../app/Admin/Posts/Post.Controller');
-// users
-router.route('/users').get(verifyAuthentication, usersRender);
-//home
-router.route('/').get(homepageRender);
-//dashboard
-router.get('/dashboard', dashboardRender);
-//login
+// admin render
+router
+    .route('/users')
+    .get(verifyAuthentication, verifynotAuthorization, usersRender);
+
+router
+    .route('/')
+    .get(verifynotAuthorization, verifynotAuthorization, homepageRender);
+router.route('/dashboard').get(verifynotAuthorization, dashboardRender);
+//admin method
 router
     .route('/login')
     .get(verifynotAuthentication, loginRender)
     .post(loginMethod);
 
-//register
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
     .post(registerMethod);
-//logout
 router.post('/logout', logoutMethod);
 //USER
-//view user
-router.route('/users/:id').get(verifyAuthentication, userView);
-
-// edit user
+router
+    .route('/users/:id')
+    .get(verifyAuthentication, verifynotAuthorization, userView);
 router.route('/edit/:id').put(verifyAuthentication, userEdit);
-
-//delete user
 router.route('/delete/:id').delete(verifyAuthentication, userDelete);
 
-// PRODUCT
-//view products table
-router.route('/products').get(verifyAuthentication, productsRender);
-//view product types table
+// Product Type
+
 router.route('/product-types').get(verifyAuthentication, productTypesRender);
-//add product type
 router
     .route('/product-type/add')
     .get(verifyAuthentication, productsRender)
     .post(verifyAuthentication, productTypeMethod);
-//view product type
 router.route('/product-type/:id').get(verifyAuthentication, productTypeRender);
-// edit product type
 router
     .route('/product-type/:id/update')
     .put(verifyAuthentication, productTypeEdit);
-
-//delete product type
 router
     .route('/product-type/:id/delete')
     .delete(verifyAuthentication, productTypeDelete);
-
-//view product
+// Product
+router.route('/products').get(verifyAuthentication, productsRender);
 router.route('/product/:id').get(verifyAuthentication, productRender);
-
-//add product
 router
     .route('/product/add')
     .get(verifyAuthentication, productsRender)
     .post(verifyAuthentication, uploadFile.single('imgProduct'), productMethod);
-// edit product
 router
     .route('/product/:id/update')
     .put(verifyAuthentication, verifyAuthorization, productEdit);
 router
     .route('/product/:id/update/client')
     .put(verifyAuthentication, verifyAuthorization, productEditClient);
-//delete product
 router
     .route('/product/:id/delete')
     .delete(verifyAuthentication, verifyAuthorization, productDelete);
 router
     .route('/product/:id/delete/client')
     .delete(verifyAuthentication, verifyAuthorization, productDeleteClient);
-// upload.single('imgProduct')
 router
     .route('/product/:id/add-img')
     .post(uploadFile.single('imgProduct'), productUploadfile);
@@ -137,13 +123,12 @@ router
 //route relate role
 router.route('/role/add').post(addRole);
 
-// POSTS & CATEGORIES
-
+//CATEGORIES
 router.route('/categories').get(categoryRender).post(categoryMethod);
 router.route('/category/:id/').get(categoryDetailRender);
 router.route('/category/:id/delete').delete(categoryDelete);
 router.route('/category/:id/update').put(categoryEdit);
-
+// POSTS
 router.route('/posts').get(postController.postRender);
 router.route('/post/:id').get(postController.postDetailRender);
 router.route('/post/:id/update').put(postController.postEdit);

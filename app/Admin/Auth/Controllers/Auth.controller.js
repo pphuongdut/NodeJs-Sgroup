@@ -16,52 +16,42 @@ const registerRender = (req, res) => {
     });
 };
 const homepageRender = (req, res) => {
-    const usernow = req.session.user;
-    console.log(req.session.user.roleId);
-    if (req.session.user.roleId == 1) {
-        return res.render('admin/pages/index', {
-            title: 'Home',
-            usernow: usernow,
-        });
-    } else res.redirect('/JudoStore');
+    return res.render('admin/pages/index', {
+        title: 'Home',
+        usernow: req.session.user,
+    });
 };
 const dashboardRender = (req, res) => {
-    const usernow = req.session.user;
-    if (req.session.user.roleId == 1) {
-        return res.render('admin/pages/dashboard', {
-            title: 'Dashboard',
-            usernow: usernow,
-        });
-    } else res.redirect('/JudoStore');
+    return res.render('admin/pages/dashboard', {
+        title: 'Dashboard',
+        usernow: req.session.user,
+    });
 };
 //Method
 const loginMethod = async (req, res, Promise) => {
     const errors = validationResult(req);
-    const { email, password } = req.body;
     const user = await knex('users')
         .leftJoin('role', 'users.roleId', 'role.role_id')
         .where({
-            email: email,
+            email: req.body.email,
             role_name: 'admin',
         })
-        .select('*')
         .first();
     console.log(user);
     if (user) {
-        const result = await bcrypt.compare(password, user.password);
-        console.log(result);
-        if (!result) {
-            req.flash('errors', {
-                param: 'password',
-                msg: 'Wrong password',
-            });
-            return res.redirect('/admin/login');
-        } else {
-            req.session.user = user;
-            return res.redirect('/admin/users');
-        }
-    }
-    if (!user) {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if (!result) {
+                req.flash('errors', {
+                    param: 'password',
+                    msg: 'Wrong password',
+                });
+                return res.redirect('/admin/login');
+            } else {
+                req.session.user = user;
+                return res.redirect('/admin/users');
+            }
+        });
+    } else {
         req.flash('errors', {
             param: 'email',
             msg: 'Email does not exist',
@@ -81,28 +71,27 @@ const registerMethod = async (req, res, Promise) => {
         req.flash('errors', errors.array());
         return res.redirect('/admin/register');
     }
-    const user = await knex('users')
-        .where({
-            email: req.body.email,
-        })
-        .first();
-    if (user) {
-        req.flash('errors', { param: 'email', msg: 'Email is already in use' });
-        return res.redirect('/admin/register');
-    } else {
-        console.log('OK');
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        await knex('users').insert({
-            fullname: fullname,
-            username: username,
-            email: email,
-            password: hashedPassword,
-            user_slug: slugify(email),
-            roleId: '1',
-        });
+    const salt = 10;
+    bcrypt.hash(password, salt, async (err, hashPassword) => {
+        await knex('users')
+            .insert({
+                fullname: fullname,
+                username: username,
+                email: email,
+                password: hashPassword,
+                user_slug: slugify(email),
+                roleId: '1',
+            })
+            .catch((err) => {
+                console.error(err);
+                req.flash('errors', {
+                    param: 'email',
+                    msg: 'Email is already in use',
+                });
+                return res.redirect('/admin/register');
+            });
         return res.redirect('/admin/login');
-    }
+    });
 };
 const logoutMethod = async (req, res) => {
     req.session.destroy(function (err) {

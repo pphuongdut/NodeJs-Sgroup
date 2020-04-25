@@ -29,6 +29,7 @@ const postDetailRender = async (req, res) => {
         moment,
     });
 };
+//method
 const postEdit = async (req, res) => {
     const { category_id, post_title, post_content } = req.body;
     await knex('posts')
@@ -43,20 +44,7 @@ const postEdit = async (req, res) => {
         });
     return res.redirect('/admin/posts');
 };
-const postEditClient = async (req, res) => {
-    const { category_id, post_title, post_content } = req.body;
-    await knex('posts')
-        .where({
-            post_slug: req.params.id,
-        })
-        .update({
-            post_title: post_title,
-            post_slug: slugify(post_title) + '-' + Date.now(),
-            post_content: post_content,
-            category_id: category_id,
-        });
-    return res.redirect('/posts');
-};
+
 const postDelete = async (req, res) => {
     await knex('posts')
         .where({
@@ -75,7 +63,20 @@ const postDeleteClient = async (req, res) => {
     console.log('delete ok');
     return res.redirect('/posts');
 };
-
+const postEditClient = async (req, res) => {
+    const { category_id, post_title, post_content } = req.body;
+    await knex('posts')
+        .where({
+            post_slug: req.params.id,
+        })
+        .update({
+            post_title: post_title,
+            post_slug: slugify(post_title) + '-' + Date.now(),
+            post_content: post_content,
+            category_id: category_id,
+        });
+    return res.redirect('/posts');
+};
 module.exports = {
     postRender,
     postDetailRender,

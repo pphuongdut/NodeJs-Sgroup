@@ -1,6 +1,5 @@
 const knex = require('../../../../database/knex');
 const detailProductTypeRender = async (req, res) => {
-    const usernow = req.session.user;
     console.log(req.params.id);
     const products = await knex('products')
         .leftJoin(
@@ -14,7 +13,7 @@ const detailProductTypeRender = async (req, res) => {
     return res.render('client/pages/product_type', {
         product_types: product_types,
         products: products,
-        usernow,
+        usernow: req.session.user,
     });
 };
 module.exports = { detailProductTypeRender };

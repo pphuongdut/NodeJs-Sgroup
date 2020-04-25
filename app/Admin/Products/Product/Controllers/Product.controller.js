@@ -4,7 +4,6 @@ const path = require('path');
 const slugify = require('slugify');
 // Render
 const productsRender = async (req, res) => {
-    const usernow = req.session.user;
     const joinProducts = await knex('products')
         .leftJoin(
             'product_types',
@@ -30,31 +29,14 @@ const productsRender = async (req, res) => {
         );
     return res.render('admin/pages/products', {
         title: ' Products',
-        usernow: usernow,
+        usernow: req.session.user,
         product_types: joinProductTypes,
         products: joinProducts,
         moment,
     });
 };
 
-const productMethod = async (req, res, Promise) => {
-      console.log(req.file);
-    const usernow = req.session.user;
-    const { product_name, product_description, product_type_id } = req.body;
-    console.log(req.body);
-    await knex('products').insert({
-        product_name: product_name,
-        product_type_id: product_type_id,
-        product_description: product_description,
-        user_id: usernow.id,
-        product_slug: slugify(product_name) + '-' + Date.now(),
-        // img_src: req.file.filename,
-    });
-    return res.redirect('/admin/products');
-};
-// Render
 const productRender = async (req, res) => {
-    const usernow = req.session.user;
     const joinProduct = await knex('products')
         .where({ product_slug: req.params.id })
         .leftJoin(
@@ -73,62 +55,74 @@ const productRender = async (req, res) => {
         );
     return res.render('admin/pages/product', {
         title: ' Product',
-        usernow: usernow,
+        usernow: req.session.user,
         product: joinProduct,
         moment,
     });
 };
+//method
+const productMethod = async (req, res, Promise) => {
+    console.log(req.file);
+
+    const { product_name, product_description, product_type_id } = req.body;
+    console.log(req.body);
+    await knex('products').insert({
+        product_name: product_name,
+        product_type_id: product_type_id,
+        product_description: product_description,
+        user_id: req.session.user.id,
+        product_slug: slugify(product_name) + '-' + Date.now(),
+        // img_src: req.file.filename,
+    });
+    return res.redirect('/admin/products');
+};
+
 const productEdit = async (req, res) => {
-    const { product_name, product_description } = req.body;
     await knex('products')
         .where({
             product_slug: req.params.id,
         })
         .update({
-            product_name: product_name,
-            product_description: product_description,
+            product_name: req.body.product_name,
+            product_description: req.body.product_description,
         });
     return res.redirect('/admin/products');
 };
-const productEditClient = async (req, res) => {
-    const { product_name, product_description } = req.body;
-    await knex('products')
-        .where({
-            product_slug: req.params.id,
-        })
-        .update({
-            product_name: product_name,
-            product_description: product_description,
-        });
-    return res.redirect('/JudoStore');
-};
+
 const productDelete = async (req, res) => {
-    console.log(req.params.id);
     await knex('products')
         .where({
             product_slug: req.params.id,
         })
         .delete();
-    console.log('delete ok');
     return res.redirect('/admin/products');
-};
-const productDeleteClient = async (req, res) => {
-    console.log(req.params.id);
-    await knex('products')
-        .where({
-            product_slug: req.params.id,
-        })
-        .delete();
-    console.log('delete ok');
-    return res.redirect('/JudoStore');
 };
 const productUploadfile = async (req, res) => {
-    console.log(req.file);
     await knex('products').where({ product_slug: req.params.id }).update({
         img_src: req.file.filename,
     });
     return res.redirect('/admin/products');
 };
+const productDeleteClient = async (req, res) => {
+    await knex('products')
+        .where({
+            product_slug: req.params.id,
+        })
+        .delete();
+    return res.redirect('/Judostore');
+};
+const productEditClient = async (req, res) => {
+    await knex('products')
+        .where({
+            product_slug: req.params.id,
+        })
+        .update({
+            product_name: req.body.product_name,
+            product_description: req.body.product_description,
+        });
+    return res.redirect('/Judostore');
+};
+
 module.exports = {
     productsRender,
     productRender,

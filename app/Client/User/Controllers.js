@@ -16,29 +16,27 @@ const registerRender = (req, res) => {
 };
 const loginMethod = async (req, res, Promise) => {
     const errors = validationResult(req);
-    const { email, password } = req.body;
     const user = await knex('users')
+        .leftJoin('role', 'users.roleId', 'role.role_id')
         .where({
-            email: email,
+            email: req.body.email,
         })
-        .select('*')
         .first();
     console.log(user);
     if (user) {
-        const result = await bcrypt.compare(password, user.password);
-        console.log(result);
-        if (!result) {
-            req.flash('errors', {
-                param: 'password',
-                msg: 'Wrong password',
-            });
-            return res.redirect('/login');
-        } else {
-            req.session.user = user;
-            return res.redirect('/JudoStore');
-        }
-    }
-    if (!user) {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if (!result) {
+                req.flash('errors', {
+                    param: 'password',
+                    msg: 'Wrong password',
+                });
+                return res.redirect('/login');
+            } else {
+                req.session.user = user;
+                return res.redirect('/Judostore');
+            }
+        });
+    } else {
         req.flash('errors', {
             param: 'email',
             msg: 'Email does not exist',
@@ -58,28 +56,27 @@ const registerMethod = async (req, res, Promise) => {
         req.flash('errors', errors.array());
         return res.redirect('/register');
     }
-    const user = await knex('users')
-        .where({
-            email: req.body.email,
-        })
-        .first();
-    if (user) {
-        req.flash('errors', { param: 'email', msg: 'Email is already in use' });
-        return res.redirect('/register');
-    } else {
-        console.log('OK');
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        await knex('users').insert({
-            fullname: fullname,
-            username: username,
-            email: email,
-            password: hashedPassword,
-            user_slug: slugify(email),
-            roleId: '2',
-        });
+    const salt = 10;
+    bcrypt.hash(password, salt, async (err, hashPassword) => {
+        await knex('users')
+            .insert({
+                fullname: fullname,
+                username: username,
+                email: email,
+                password: hashPassword,
+                user_slug: slugify(email),
+                roleId: '2',
+            })
+            .catch((err) => {
+                console.error(err);
+                req.flash('errors', {
+                    param: 'email',
+                    msg: 'Email is already in use',
+                });
+                return res.redirect('/register');
+            });
         return res.redirect('/login');
-    }
+    });
 };
 
 const logoutMethod = async (req, res) => {

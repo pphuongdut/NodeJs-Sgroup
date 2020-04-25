@@ -3,34 +3,28 @@ const knex = require('../../../../database/knex');
 
 // render
 const usersRender = async (req, res) => {
-    console.log('user render');
-    const users = await knex('users').select('*');
-    const usernow = req.session.user;
     return res.render('admin/pages/table', {
         title: 'Users',
-        users: users,
-        usernow: usernow,
+        users: await knex('users').select('*'),
+        usernow: req.session.user,
         moment,
     });
 };
 
 // method
-
 const userView = async (req, res, Promise) => {
-    const usernow = req.session.user;
-    const user_view = await knex('users')
-        .where({
-            user_slug: req.params.id,
-        })
-        .select('*');
-    console.log(user_view);
     return res.render('admin/pages/userprofile', {
         title: 'user',
-        users: user_view,
-        usernow: usernow,
+        users: await knex('users')
+            .where({
+                user_slug: req.params.id,
+            })
+            .select('*'),
+        usernow: req.session.user,
         moment,
     });
 };
+
 const userEdit = async (req, res) => {
     await knex('users')
         .where({

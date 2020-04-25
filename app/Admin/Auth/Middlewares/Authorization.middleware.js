@@ -1,16 +1,17 @@
 // check user to login
 const verifyAuthorization = (req, res, next) => {
-    console.log(req.session.user)
+    console.log(1);
     if (req.session.user.roleId == 1) {
         return next();
     }
     return res.redirect('/admin/login');
 };
 const verifynotAuthorization = (req, res, next) => {
-    if (!req.session.user.roleId == 1) {
-        return next();
-    }
-    return res.redirect('/admin');
+    console.log(2);
+    console.log(req.session.user.roleId);
+    if (req.session.user.roleId !== 1) {
+        return res.redirect('/Judostore');
+    } else return next();
 };
 
 module.exports = {

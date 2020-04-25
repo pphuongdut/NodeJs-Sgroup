@@ -1,6 +1,7 @@
 const knex = require('../../../database/knex');
 const slugify = require('slugify');
 const moment = require('moment');
+//render
 const categoryDetailRender = async (req, res) => {
     const posts = await knex('posts')
         .leftJoin('categories', 'posts.category_id', 'categories.category_id')

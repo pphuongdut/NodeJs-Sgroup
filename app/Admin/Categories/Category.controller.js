@@ -1,6 +1,7 @@
 const knex = require('../../../database/knex');
 const moment = require('moment');
 const slugify = require('slugify');
+//render
 const categoryRender = async (req, res) => {
     const joinCategories = await knex('categories')
         .leftJoin('users', 'categories.user_id', 'users.id')
@@ -33,6 +34,7 @@ const categoryDetailRender = async (req, res) => {
             .select('*'),
     });
 };
+//method
 const categoryMethod = async (req, res, next) => {
     const { category_name } = req.body;
     const onlyCategory = await knex('categories')
