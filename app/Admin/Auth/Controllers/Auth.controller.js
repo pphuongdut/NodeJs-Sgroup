@@ -37,7 +37,6 @@ const loginMethod = async (req, res, Promise) => {
             role_name: 'admin',
         })
         .first();
-    console.log(user);
     if (user) {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (!result) {
@@ -84,6 +83,7 @@ const registerMethod = async (req, res, Promise) => {
             })
             .catch((err) => {
                 console.error(err);
+
                 req.flash('errors', {
                     param: 'email',
                     msg: 'Email is already in use',
@@ -106,6 +106,7 @@ const addRole = async (req, res) => {
     await knex('role').insert({
         role_name: req.body.role_name,
     });
+    return res.redirect('/admin/users');
 };
 module.exports = {
     loginRender,

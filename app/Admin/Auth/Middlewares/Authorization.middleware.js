@@ -13,7 +13,6 @@ const verifynotAuthorization = (req, res, next) => {
         return res.redirect('/Judostore');
     } else return next();
 };
-
 module.exports = {
     verifynotAuthorization,
     verifyAuthorization,

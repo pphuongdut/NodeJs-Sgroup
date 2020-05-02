@@ -1,0 +1,122 @@
+<div class="tw-w-full lg_tw-w-1/3 tw-px-4 ">
+    <div class="sidebar tw-h-full tw-flex tw-flex-wrap tw-flex-col md_tw-flex-row lg_tw-flex-col tw--mx-4">
+        <div class="tw-w-full md_tw-w-1/2 lg_tw-w-full tw-px-4 tw-mb-8">
+            <div class="sidebar-widgets-1">
+                <!-- social -->
+                <div id="stein_kit_social-1"
+                    class="widget widget_stein_kit_social tw-bg-surface tw-p-6 md_tw-p-8 tw-mb-8 tw-clearfix">
+                    <h3 class="widget-title tw-text-xl tw-mb-5">Let’s Social</h3>
+                    <ul class="social tw-flex tw-flex-wrap tw--mr-3 tw--mb-3">
+                        <li class="social-item tw-w-1/5 tw-mb-3"> <a href="https://www.facebook.com" title="Facebook"
+                                class="social-link tw-block tw-h-10 tw-w-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-lg lg_tw-h-12 lg_tw-w-12 hover_tw-no-underline hover_tw-opacity-75 tw-bg-alt tw-text-strong hover_tw-text-strong"
+                                target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li class="social-item tw-w-1/5 tw-mb-3"> <a href="https://twitter.com" title="Twitter"
+                                class="social-link tw-block tw-h-10 tw-w-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-lg lg_tw-h-12 lg_tw-w-12 hover_tw-no-underline hover_tw-opacity-75 tw-bg-alt tw-text-strong hover_tw-text-strong"
+                                target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li class="social-item tw-w-1/5 tw-mb-3"> <a href="https://www.instagram.com" title="Instagram"
+                                class="social-link tw-block tw-h-10 tw-w-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-lg lg_tw-h-12 lg_tw-w-12 hover_tw-no-underline hover_tw-opacity-75 tw-bg-alt tw-text-strong hover_tw-text-strong"
+                                target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li class="social-item tw-w-1/5 tw-mb-3"> <a href="https://www.youtube.com" title="YouTube"
+                                class="social-link tw-block tw-h-10 tw-w-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-lg lg_tw-h-12 lg_tw-w-12 hover_tw-no-underline hover_tw-opacity-75 tw-bg-alt tw-text-strong hover_tw-text-strong"
+                                target="_blank"><i class="fa fa-youtube"></i></a></li>
+                        <li class="social-item tw-w-1/5 tw-mb-3"> <a href="https://linkedin.com" title="Linkedin"
+                                class="social-link tw-block tw-h-10 tw-w-10 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-text-lg lg_tw-h-12 lg_tw-w-12 hover_tw-no-underline hover_tw-opacity-75 tw-bg-alt tw-text-strong hover_tw-text-strong"
+                                target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+                <!-- social -->
+                <div id="stein_kit_posts-1"
+                    class="widget widget_stein_kit_posts tw-bg-surface tw-p-6 md_tw-p-8 tw-mb-8 tw-clearfix">
+                    <h3 class="widget-title tw-text-xl tw-mb-5">Latest Stories</h3>
+                </div>
+                <!-- tag -->
+                <div id="tag_cloud-2"
+                    class="widget widget_tag_cloud tw-bg-surface tw-p-6 md_tw-p-8 tw-mb-8 tw-clearfix">
+                    <h3 class="widget-title tw-text-xl tw-mb-5">Tags</h3>
+                    <div class="tagcloud">
+                        <% if (tags) tags.forEach(tag => { %>
+                        <a href="/tag/<%=tag.tag_id %>" class="tag-cloud-link tag-link-5 tag-link-position-1"
+                            style="font-size: 0.875rem;" aria-label="Beautiful (6 items)"><%= tag.tag_name %></a>
+                        <% }) %>
+
+                    </div>
+                </div>
+                <!-- end tag -->
+            </div>
+        </div>
+        <!-- new letter & instagram photo -->
+        <div class="tw-flex-1 tw-w-full md_tw-w-1/2 lg_tw-w-full tw-px-4 tw-mb-8 tw-relative">
+            <div class="sidebar-widgets-2 tw-sticky tw-top-0" style="top: 0px;">
+                <div id="stein_kit_mailchimp_form-1"
+                    class="widget widget_stein_kit_mailchimp_form tw-bg-surface tw-p-6 md_tw-p-8 tw-mb-8 tw-clearfix">
+                    <h3 class="widget-title tw-text-xl tw-mb-5">Newsletter</h3>
+                    <p class="tw-mb-4">Subscribe to our newsletter and get our newest updates
+                        right on your inbox.</p>
+                    <form method="POST" action="">
+                        <p class="tw-mb-4"> <input type="email" class="input" name="EMAIL"
+                                placeholder="Your email address" required=""></p>
+                        <p class="tw-mb-4"> <label> <input name="AGREE_TO_TERMS" type="checkbox" value="1" required="">
+                                <a href="https://stein.rifki.net/rosenstein/" target="_blank"
+                                    class="tw-text-sm tw-text-inherit">I agree to the terms
+                                    &amp; conditions</a> </label></p> <input type="submit"
+                            class="btn btn-accent tw-w-full" value="Subscribe">
+                    </form>
+                </div>
+                <div id="stein_kit_instagram-1"
+                    class="widget widget_stein_kit_instagram tw-bg-surface tw-p-6 md_tw-p-8 tw-mb-8 tw-clearfix">
+                    <h3 class="widget-title tw-text-xl tw-mb-5">@Instagram</h3>
+                    <ul class="instagram-items tw-list-reset tw-flex tw-flex-wrap tw-grid tw-grid-columns-3"
+                        style="grid-gap: 8px;">
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmbtvH5PX"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/61832115_2267467110142730_6575663477141402401_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=102&amp;_nc_ohc=N2Tp11y_OygAX-tS3cK&amp;oh=4e216d58aa1dc328ea7af835af3c6734&amp;oe=5ED6F1F9">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmX11nP6U"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/61141927_696612320788539_3510179327031708519_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=103&amp;_nc_ohc=6sWNpYwMqGAAX-3HoPE&amp;oh=ac71a42a7f24450d2f8fd5815180f126&amp;oe=5ED4C7A7">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmVbAHV6G"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/61386307_953281648199656_7183302555701741359_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=104&amp;_nc_ohc=V1ZRKNCRCeQAX_TQkBn&amp;oh=9bc24eef7ca5eff60ba45064fa2f24f0&amp;oe=5ED704BD">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmTMGnSP7"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/62250395_338474113494043_3794137645739046440_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=107&amp;_nc_ohc=c6OJyMQFL7QAX9xw8jp&amp;oh=8957a1622dbfdcf4958c4c2529c91745&amp;oe=5ED5B886">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmPsvnhqt"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/61841479_101691431073000_740603526112820306_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=Ufq3a4288YAAX82oapx&amp;oh=9957e2cfefe69e404ed52431e5ae4e6d&amp;oe=5ED45F65">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmM4Indcy"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/62482396_678849379252394_6968180838059675867_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=102&amp;_nc_ohc=CQAwInp8BwMAX8wr97W&amp;oh=8b102a3777ea9ad27b224c5e7d682bd3&amp;oe=5ED41376">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/ByfmLJBnCy2"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/61718626_141224573697861_5529791485151699731_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=109&amp;_nc_ohc=zsrXEEEzaioAX_Ufa4q&amp;oh=c448bacfa1c437ab85173ab3d22bc95c&amp;oe=5ED5252F">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/Byfl83znuMh"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/62638202_213914766236238_984649334233773227_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=106&amp;_nc_ohc=lNB1TeFyFBYAX8uTSsM&amp;oh=1e991fd695e13bb658e785d74a530cbe&amp;oe=5ED71B76">
+                            </a></li>
+                        <li class="instagram-item tw-flex-auto"> <a href="https://www.instagram.com/p/Byfl2bbHpiO"
+                                class="instagram-image tw-block tw-bg-alt tw-relative tw-aspect-ratio-1/1 hover_tw-opacity-85 tw-transition-opacity tw-transition-duration-200">
+                                <img class="tw-object-cover tw-absolute tw-left-0 tw-top-0 tw-w-full tw-h-full lazyload"
+                                    src="https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s150x150/61158228_1198260260335811_5546933686227530111_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com&amp;_nc_cat=111&amp;_nc_ohc=QaFskkrzNfQAX9yU6ou&amp;oh=512da922dcfaa7510df2497a70477af4&amp;oe=5ED40BA1">
+                            </a></li>
+                    </ul> <a href="https://www.instagram.com/" class="btn btn-accent tw-w-full tw-mt-6"><i
+                            class="fa fa-instagram tw-mr-2"></i>Follow us</a>
+                </div>
+            </div>
+        </div>
+        <!-- end new letter & instagram photo -->
+    </div>
+</div>

@@ -40,8 +40,6 @@ const categoryMethod = async (req, res, next) => {
     const onlyCategory = await knex('categories')
         .where({ category_name: category_name })
         .select('*');
-    console.log(onlyCategory);
-
     if (onlyCategory.length == 0) {
         await knex('categories').insert({
             category_name: category_name,

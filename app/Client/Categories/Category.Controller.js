@@ -10,13 +10,17 @@ const categoryDetailRender = async (req, res) => {
             category_slug: req.params.id,
         })
         .select('*');
+    const tags = await knex('post_tags')
+        .leftJoin('tags', 'post_tags.tag_id', 'tags.tag_id')
+        .select('*');
     return res.render('client/pages/categorydetail', {
         title: posts.post_title,
-        usernow: req.session.user.id,
         posts,
         product_types: await knex('product_types').select('*'),
+        products: await knex('products').select('*'),
         moment,
         categories: await knex('categories').select('*'),
+        tags,
     });
 };
 module.exports = {

@@ -31,10 +31,7 @@
     <% include ../partials/navbar %>
     <!-- end nav-bar  -->
     <div class="container" style="margin-top: 100px;">
-        <% categories.forEach(category => { %>
-        <a href="/category/<%= category.category_slug %>"><button
-                class="btn btn-dark"><%= category.category_name %></button></a>
-        <% }); %>
+        <% include ../partials/nav-blog %>
     </div>
     <div class=" container mt-5 ">
         <div class="row">

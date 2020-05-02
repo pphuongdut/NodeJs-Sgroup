@@ -56,6 +56,7 @@ const {
     categoryDetailRender,
 } = require('../app/Admin/Categories/Category.controller');
 const postController = require('../app/Admin/Posts/Post.Controller');
+const tagController = require('../app/Admin/Tags/Tag.controller');
 // admin render
 router
     .route('/users')
@@ -63,7 +64,7 @@ router
 
 router
     .route('/')
-    .get(verifynotAuthorization, verifynotAuthorization, homepageRender);
+    .get(verifyAuthentication, verifynotAuthorization, homepageRender);
 router.route('/dashboard').get(verifynotAuthorization, dashboardRender);
 //admin method
 router
@@ -86,10 +87,7 @@ router.route('/delete/:id').delete(verifyAuthentication, userDelete);
 // Product Type
 
 router.route('/product-types').get(verifyAuthentication, productTypesRender);
-router
-    .route('/product-type/add')
-    .get(verifyAuthentication, productsRender)
-    .post(verifyAuthentication, productTypeMethod);
+router.route('/product-type/add').post(verifyAuthentication, productTypeMethod);
 router.route('/product-type/:id').get(verifyAuthentication, productTypeRender);
 router
     .route('/product-type/:id/update')
@@ -133,4 +131,12 @@ router.route('/posts').get(postController.postRender);
 router.route('/post/:id').get(postController.postDetailRender);
 router.route('/post/:id/update').put(postController.postEdit);
 router.route('/post/:id/delete').delete(postController.postDelete);
+//TAGS
+router.route('/tags').get(verifyAuthentication, tagController.tagsRender);
+router
+    .route('/tag/:id/update')
+    .put(verifyAuthentication, tagController.tagEdit);
+router
+    .route('/tag/:id/delete')
+    .delete(verifyAuthentication, tagController.tagDelete);
 module.exports = router;

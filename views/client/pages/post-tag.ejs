@@ -38,20 +38,26 @@
         <% include ../partials/nav-blog %>
         <main id="site-content" class="site-content tw-relative tw-flex-1 tw-z-10">
 
-            <!-- end -->
             <div class="section section-main tw-py-12 lg_tw-py-16 tw-flex tw-flex-row">
                 <div class="tw-container">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw--mx-4 tw--mb-8">
                         <!-- each POST -->
-
-                        <div class="tw-w-full tw-px-4 lg_tw-w-2/3"> <% postdetail.forEach(post =>{ %>
+                        <div class="tw-w-full tw-px-4 lg_tw-w-2/3"> <% posts.forEach(post =>{ %>
                             <div class="content tw-mb-8">
                                 <div class="posts tw--mx-5">
                                     <div class="tw-flex tw-flex-row tw-flex-wrap tw--mb-10">
                                         <div class="tw-w-full tw-h-auto tw-px-5 tw-mb-10">
                                             <article
                                                 class="post-style-card tw-bg-surface tw-flex tw-flex-col tw-relative md_tw-flex-row post-23 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-beauty tag-diet tag-female tag-makeup">
-
+                                                <div
+                                                    class="post-media post-media-image tw-bg-alt tw-relative tw-aspect-ratio-16/9 md_tw-aspect-ratio-none md_tw-max-w-xs md_tw-w-1/3 lg_tw-w-1/2">
+                                                    <a href="#title"
+                                                        class="post-thumbnail tw-block tw-absolute tw-inset-0"> <img
+                                                            width="1280" height="720"
+                                                            src="https://i.pinimg.com/originals/5d/59/1c/5d591c69bf7763701f92d716bdebcd5f.jpg"
+                                                            class="tw-h-full tw-w-full tw-object-cover wp-post-image lazyautosizes ls-is-cached lazyloaded"
+                                                            alt="title" sizes="224px"> </a>
+                                                </div>
                                                 <div
                                                     class="post-body tw-flex-1 tw-p-6 md_tw-p-8 tw-text-left lg_tw-p-8">
                                                     <div class="post-header">
@@ -65,27 +71,33 @@
                                                         <div class="post-meta tw-text-sm tw-text-soft tw-mt-4"> <span
                                                                 class="post-meta-author"><span>By</span> <a
                                                                     class="tw-text-strong hover_tw-no-underline"
-                                                                    href=""><%= post.email%></a><br></span> <time
+                                                                    href=""><%= post.email %></a><br></span> <time
                                                                 class="post-meta-date"><%= moment(post.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></time>
                                                         </div>
-                                                        <div> <%- post.post_content %></div>
                                                     </div>
-
+                                                    <div class="post-excerpt tw-mt-4">
+                                                        <p class="tw-mb-0 tw-mt-4"> <a href="/post/<%=post.post_slug %>"
+                                                                class="post-more-link tw-overline tw-font-semibold tw-text-sm tw-text-strong hover_tw-no-underline">Read
+                                                                post <i class="fa fa-arrow-right tw-ml-2"> </i></a></p>
+                                                    </div>
                                                 </div>
-                            
                                             </article>
-                                            <div class="post-tags tw-flex tw-flex-wrap tw-mt-6 tw--mb-2">
-                                                <% if (tags) tags.forEach(tag => { %>
-                                                <a href="/tag/<%=tag.tag_id %>" class="tag-cloud-link tag-link-5 tag-link-position-1" style="font-size: 0.875rem;"
-                                                    aria-label="Beautiful (6 items)"><%= tag.tag_name %></a>
-                                                <% }) %>
-                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
                             </div><% }) %>
-
+                            <!-- navigation -->
+                            <nav class="navigation pagination " role="navigation">
+                                <h2 class="screen-reader-text">Posts navigation</h2>
+                                <div class="nav-links tw-flex"><span aria-current="page"
+                                        class="page-numbers current">1</span> <a class="page-numbers"
+                                        href="https://stein.rifki.net/rosenstein/page/2/">2</a> <a
+                                        class="next page-numbers"
+                                        href="https://stein.rifki.net/rosenstein/page/2/"><span
+                                            class="tw-mr-2">Next</span><i class="fa fa-arrow-right"></i></a></div>
+                            </nav>
+                            <!-- end navigation -->
                         </div>
 
                         <!-- end each POST -->

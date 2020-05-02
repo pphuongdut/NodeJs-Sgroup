@@ -5,7 +5,7 @@
     <link media="all"
         href="https://stein.rifki.net/rosenstein/wp-content/cache/autoptimize/3/autoptimize_17c546fc3e4cca7909fa0e8495f97827.php"
         rel="stylesheet">
-    <title>Judo BLog</title>
+    <title>Judo Blog</title>
     <link rel="dns-prefetch" href="//s.w.org">
     <link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
     <link rel="alternate" type="application/rss+xml" title="Rosenstein » Feed"
@@ -37,21 +37,87 @@
     <div id="site" class="site tw-flex tw-flex-col tw-h-full tw-relative tw-transition-200">
         <% include ../partials/nav-blog %>
         <main id="site-content" class="site-content tw-relative tw-flex-1 tw-z-10">
-
+            <!-- intro -->
+            <div class="section section-promo-boxes" style="padding-top:5vw;">
+                <div class="tw-container">
+                    <div class=" tw-text-center tw-mb-8">
+                        <h2 class="section-title tw-text-3xl tw-mb-0"> Welcome to Judo Blog</h2>
+                        <p class="section-subtitle tw-text-soft tw-mt-2 tw-mb-0"> Love
+                            dogs and coffee.</p>
+                    </div>
+                    <div class="section-content">
+                        <div class="promo-boxes">
+                            <div class="promo-boxes-items tw-flex tw-flex-wrap tw--mx-4 tw--mb-8">
+                                <div
+                                    class="promo-boxes-item tw-flex-auto tw-w-full md_tw-w-1/2 lg_tw-w-1/3 tw-px-4 tw-mb-8">
+                                    <a href="#"
+                                        class="promo-box group tw-bg-alt tw-block tw-relative tw-aspect-ratio-16/9 tw-overflow-hidden">
+                                        <img width="480" height="270"
+                                            src="https://vyctravel.com/libs/upload/ckfinder/images/Maldives/10.png"
+                                            class="tw-absolute tw-inset-0 tw-h-full tw-w-full tw-object-cover lazyautosizes ls-is-cached lazyloaded"
+                                            sizes="320px">
+                                        <div
+                                            class="tw-flex tw-items-center tw-justify-center tw-text-light-default tw-absolute tw-inset-0 tw-z-10 tw-p-12">
+                                            <span class="btn btn-white"> Travel </span></div>
+                                    </a></div>
+                                <div
+                                    class="promo-boxes-item tw-flex-auto tw-w-full md_tw-w-1/2 lg_tw-w-1/3 tw-px-4 tw-mb-8">
+                                    <a href="#"
+                                        class="promo-box group tw-bg-alt tw-block tw-relative tw-aspect-ratio-16/9 tw-overflow-hidden">
+                                        <img width="480" height="270"
+                                            src="https://media-cdn.tripadvisor.com/media/photo-s/0f/ae/3c/3c/photo0jpg.jpg"
+                                            class="tw-absolute tw-inset-0 tw-h-full tw-w-full tw-object-cover lazyautosizes ls-is-cached lazyloaded"
+                                            sizes="320px">
+                                        <div
+                                            class="tw-flex tw-items-center tw-justify-center tw-text-light-default tw-absolute tw-inset-0 tw-z-10 tw-p-12">
+                                            <span class="btn btn-white"> RELAX</span></div>
+                                    </a></div>
+                                <div
+                                    class="promo-boxes-item tw-flex-auto tw-w-full md_tw-w-1/2 lg_tw-w-1/3 tw-px-4 tw-mb-8">
+                                    <a href="#"
+                                        class="promo-box group tw-bg-alt tw-block tw-relative tw-aspect-ratio-16/9 tw-overflow-hidden">
+                                        <img width="480" height="270"
+                                            src="https://nationalpostcom.files.wordpress.com/2019/06/tapas1.jpg?quality=80&strip=all&w=780"
+                                            class="tw-absolute tw-inset-0 tw-h-full tw-w-full tw-object-cover lazyautosizes ls-is-cached lazyloaded"
+                                            sizes="672px">
+                                        <div
+                                            class="tw-flex tw-items-center tw-justify-center tw-text-light-default tw-absolute tw-inset-0 tw-z-10 tw-p-12">
+                                            <span class="btn btn-white"> Cuisine </span></div>
+                                    </a></div>
+                            </div>
+                            <nav class="tw-text-center tw-mt-8 lg_tw-mt-10 " style="margin-bottom: 10px;"> <a href="#"
+                                    class="btn btn-accent tw-px-8" style="color:black">
+                                    HAVE A NICE DAY ! </a></nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end intro -->
+            <hr>
+            <!-- category -->
+            <% include ../partials/categories %>
             <!-- end -->
             <div class="section section-main tw-py-12 lg_tw-py-16 tw-flex tw-flex-row">
                 <div class="tw-container">
                     <div class="tw-flex tw-flex-row tw-flex-wrap tw--mx-4 tw--mb-8">
                         <!-- each POST -->
 
-                        <div class="tw-w-full tw-px-4 lg_tw-w-2/3"> <% postdetail.forEach(post =>{ %>
+                        <div class="tw-w-full tw-px-4 lg_tw-w-2/3"> <% posts.forEach(post =>{ %>
                             <div class="content tw-mb-8">
                                 <div class="posts tw--mx-5">
                                     <div class="tw-flex tw-flex-row tw-flex-wrap tw--mb-10">
                                         <div class="tw-w-full tw-h-auto tw-px-5 tw-mb-10">
                                             <article
                                                 class="post-style-card tw-bg-surface tw-flex tw-flex-col tw-relative md_tw-flex-row post-23 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-beauty tag-diet tag-female tag-makeup">
-
+                                                <div
+                                                    class="post-media post-media-image tw-bg-alt tw-relative tw-aspect-ratio-16/9 md_tw-aspect-ratio-none md_tw-max-w-xs md_tw-w-1/3 lg_tw-w-1/2">
+                                                    <a href="#title"
+                                                        class="post-thumbnail tw-block tw-absolute tw-inset-0"> <img
+                                                            width="1280" height="720"
+                                                            src="https://i.pinimg.com/564x/98/69/e7/9869e7597e96132f0cbf61a8a4b6b3c9.jpg"
+                                                            class="tw-h-full tw-w-full tw-object-cover wp-post-image lazyautosizes ls-is-cached lazyloaded"
+                                                            alt="title" sizes="224px"> </a>
+                                                </div>
                                                 <div
                                                     class="post-body tw-flex-1 tw-p-6 md_tw-p-8 tw-text-left lg_tw-p-8">
                                                     <div class="post-header">
@@ -68,24 +134,28 @@
                                                                     href=""><%= post.email%></a><br></span> <time
                                                                 class="post-meta-date"><%= moment(post.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></time>
                                                         </div>
-                                                        <div> <%- post.post_content %></div>
                                                     </div>
-
+                                                    <div class="post-excerpt tw-mt-4">
+                                                        <p class="tw-mb-0 tw-mt-4"> <a href="/post/<%=post.post_slug %>"
+                                                                class="post-more-link tw-overline tw-font-semibold tw-text-sm tw-text-strong hover_tw-no-underline">Read
+                                                                post <i class="fa fa-arrow-right tw-ml-2"> </i></a></p>
+                                                    </div>
                                                 </div>
-                            
                                             </article>
-                                            <div class="post-tags tw-flex tw-flex-wrap tw-mt-6 tw--mb-2">
-                                                <% if (tags) tags.forEach(tag => { %>
-                                                <a href="/tag/<%=tag.tag_id %>" class="tag-cloud-link tag-link-5 tag-link-position-1" style="font-size: 0.875rem;"
-                                                    aria-label="Beautiful (6 items)"><%= tag.tag_name %></a>
-                                                <% }) %>
-                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
                             </div><% }) %>
-
+                            <!-- navigation -->
+                            <nav class="navigation pagination " role="navigation">
+                                <h2 class="screen-reader-text">Posts navigation</h2>
+                                <div class="nav-links tw-flex"><span aria-current="page"
+                                        class="page-numbers current">1</span> <a class="page-numbers" href="#">2</a> <a
+                                        class="next page-numbers" href="#"><span class="tw-mr-2">Next</span><i
+                                            class="fa fa-arrow-right"></i></a></div>
+                            </nav>
+                            <!-- end navigation -->
                         </div>
 
                         <!-- end each POST -->

@@ -1,0 +1,90 @@
+<aside id="drawer" class="drawer tw-fixed tw-inset-0 tw-z-50 tw-invisible">
+    <div
+        class="drawer-overlay tw-bg-overlay lg_tw-bg-transparent tw-fixed tw-inset-0 tw-opacity-0 tw-transition-opacity tw-transition-200 tw-transition-ease">
+    </div>
+    <div
+        class="drawer-inner tw-bg-surface tw-fixed tw-left-0 tw-inset-y-0 tw-flex tw-flex-col tw-w-full tw--translate-x-full tw-transition-opacity-transform tw-transition-200 tw-shadow-lg">
+        <div
+            class="drawer-header tw-flex tw-items-center tw-border-b tw-border-soft tw-h-16 lg_tw-h-20 tw-px-6 md_tw-px-8">
+            <div class="site-branding tw-flex-1"> <a class="site-logo tw-inline-block" href="#"><img
+                        class="tw-inline tw-object-contain"> <a class="" href="/posts"
+                        style="font-family: 'Sacramento', cursive;font-size: 30px;font-weight: bold;color: black;">
+                        Judo Blog</a></a></div> <span
+                class="drawer-close tw-cursor-pointer tw-text-soft hover_tw-text-strong hover_tw-no-underline"> <i
+                    class="fa fa-close"></i> </span>
+        </div>
+
+        <div class="drawer-content tw-flex-1 tw-p-6 md_tw-p-8 tw-overflow-x-hidden tw-overflow-y-auto">
+            <div class="tw--mb-6 md_tw--mb-8 ">
+                <div id="nav_menu-1" class="widget tw-mb-8 widget_nav_menu tw-clearfix">
+                    <div class="menu-header-container">
+                        <ul id="menu-header" class="menu">
+                            <li class="menu-item  menu-item-has-children menu-item-78">
+                                <a href="#">Categories</a>
+                                <ul class="sub-menu">
+                                    <%categories.forEach(category => { %>
+                                    <li class="menu-item   menu-item-164">
+                                        <a
+                                            href="/category/<%=category.category_slug %>"><%= category.category_name %></a>
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </li>
+                            <li class="menu-item  menu-item-has-children menu-item-78">
+                                <a href="#">All posts</a>
+                                <ul class="sub-menu">
+                                    <% posts.forEach(post => { %>
+                                    <li class="menu-item   menu-item-164">
+                                        <a href="/post/<%=post.post_slug %>"><%= post.post_title %></a>
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </li>
+                            <li class="menu-item  menu-item-has-children menu-item-164">
+                                <a href="/Judostore"> Product types </a>
+                                <ul class="sub-menu">
+                                    <% product_types.forEach( product_type => { %>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-post  menu-item-165">
+                                        <a
+                                            href="/product-type/<%= product_type.product_type_slug %>"><%= product_type.product_type_name%></a>
+
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </li>
+                            <li class="menu-item  menu-item-has-children menu-item-164">
+                                <a href="/Judostore">Products</a>
+                                <ul class="sub-menu">
+                                    <% products.forEach( product => { %>
+                                    <li class="menu-item menu-item-object-custom menu-item-83">
+                                        <a href="/product/<%= product.product_slug %>"><%= product.product_name%></a>
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+        <nav class="drawer-footer tw-border-t tw-border-soft tw-p-4 md_tw-py-5">
+            <ul class="social tw-list-reset tw-flex">
+                <li class="tw-flex-1 tw-text-center"> <a href="https://www.facebook.com" target="_blank"
+                        title="Facebook" class="tw-block tw-text-strong hover_tw-no-underline"> <i
+                            class="fa fa-facebook"></i> </a></li>
+                <li class="tw-flex-1 tw-text-center"> <a href="https://twitter.com" target="_blank" title="Twitter"
+                        class="tw-block tw-text-strong hover_tw-no-underline"> <i class="fa fa-twitter"></i> </a>
+                </li>
+                <li class="tw-flex-1 tw-text-center"> <a href="https://www.instagram.com" target="_blank"
+                        title="Instagram" class="tw-block tw-text-strong hover_tw-no-underline"> <i
+                            class="fa fa-instagram"></i> </a></li>
+                <li class="tw-flex-1 tw-text-center"> <a href="https://www.youtube.com" target="_blank" title="YouTube"
+                        class="tw-block tw-text-strong hover_tw-no-underline"> <i class="fa fa-youtube"></i> </a></li>
+                <li class="tw-flex-1 tw-text-center"> <a href="https://linkedin.com" target="_blank" title="Linkedin"
+                        class="tw-block tw-text-strong hover_tw-no-underline"> <i class="fa fa-linkedin"></i> </a></li>
+            </ul>
+        </nav>
+    </div>
+</aside>

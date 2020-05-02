@@ -31,6 +31,7 @@ const {
 const {
     categoryDetailRender,
 } = require('../app/Client/Categories/Category.Controller');
+const { tagRender } = require('../app/Client/Post/Tag.Controller');
 // home render
 router.get('/Judostore', productsRender);
 //login
@@ -56,4 +57,6 @@ router.route('/posts').get(postRender);
 router.route('/post/:id').get(postDetailRender);
 // CATEGORIES
 router.route('/category/:id').get(categoryDetailRender);
+//TAGS
+router.route('/tag/:id').get(tagRender);
 module.exports = router;

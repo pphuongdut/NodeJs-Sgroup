@@ -1,64 +1,142 @@
-<!DOCTYPE html>
-
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/public/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link media="all"
+        href="https://stein.rifki.net/rosenstein/wp-content/cache/autoptimize/3/autoptimize_17c546fc3e4cca7909fa0e8495f97827.php"
+        rel="stylesheet">
+    <title>Judo BLog</title>
+    <link rel="dns-prefetch" href="//s.w.org">
+    <link href="https://fonts.gstatic.com" crossorigin="" rel="preconnect">
+    <link rel="alternate" type="application/rss+xml" title="Rosenstein » Feed"
+        href="https://stein.rifki.net/rosenstein/feed/">
+    <link rel="alternate" type="application/rss+xml" title="Rosenstein » Comments Feed"
+        href="https://stein.rifki.net/rosenstein/comments/feed/">
+    <script
+        type="text/javascript">window._wpemojiSettings = { "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/", "ext": ".png", "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/", "svgExt": ".svg", "source": { "concatemoji": "https:\/\/stein.rifki.net\/rosenstein\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3.3" } };
+            !function (e, a, t) { var r, n, o, i, p = a.createElement("canvas"), s = p.getContext && p.getContext("2d"); function c(e, t) { var a = String.fromCharCode; s.clearRect(0, 0, p.width, p.height), s.fillText(a.apply(this, e), 0, 0); var r = p.toDataURL(); return s.clearRect(0, 0, p.width, p.height), s.fillText(a.apply(this, t), 0, 0), r === p.toDataURL() } function l(e) { if (!s || !s.fillText) return !1; switch (s.textBaseline = "top", s.font = "600 32px Arial", e) { case "flag": return !c([127987, 65039, 8205, 9895, 65039], [127987, 65039, 8203, 9895, 65039]) && (!c([55356, 56826, 55356, 56819], [55356, 56826, 8203, 55356, 56819]) && !c([55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447], [55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447])); case "emoji": return !c([55357, 56424, 55356, 57342, 8205, 55358, 56605, 8205, 55357, 56424, 55356, 57340], [55357, 56424, 55356, 57342, 8203, 55358, 56605, 8203, 55357, 56424, 55356, 57340]) }return !1 } function d(e) { var t = a.createElement("script"); t.src = e, t.defer = t.type = "text/javascript", a.getElementsByTagName("head")[0].appendChild(t) } for (i = Array("flag", "emoji"), t.supports = { everything: !0, everythingExceptFlag: !0 }, o = 0; o < i.length; o++)t.supports[i[o]] = l(i[o]), t.supports.everything = t.supports.everything && t.supports[i[o]], "flag" !== i[o] && (t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && t.supports[i[o]]); t.supports.everythingExceptFlag = t.supports.everythingExceptFlag && !t.supports.flag, t.DOMReady = !1, t.readyCallback = function () { t.DOMReady = !0 }, t.supports.everything || (n = function () { t.readyCallback() }, a.addEventListener ? (a.addEventListener("DOMContentLoaded", n, !1), e.addEventListener("load", n, !1)) : (e.attachEvent("onload", n), a.attachEvent("onreadystatechange", function () { "complete" === a.readyState && t.readyCallback() })), (r = t.source || {}).concatemoji ? d(r.concatemoji) : r.wpemoji && r.twemoji && (d(r.twemoji), d(r.wpemoji))) }(window, document, window._wpemojiSettings);</script>
+    <script src="https://stein.rifki.net/rosenstein/wp-includes/js/wp-emoji-release.min.js?ver=5.3.3"
+        type="text/javascript" defer=""></script>
+    <link rel="https://api.w.org/" href="https://stein.rifki.net/rosenstein/wp-json/">
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://stein.rifki.net/rosenstein/xmlrpc.php?rsd">
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml"
+        href="https://stein.rifki.net/rosenstein/wp-includes/wlwmanifest.xml">
+    <meta name="generator" content="WordPress 5.3.3">
+    <link rel="preconnect" href="https://reefki.sirv.com/" crossorigin="">
+    <link rel="dns-prefetch" href="https://reefki.sirv.com/">
+    <!-- font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Dosis:wght@300;600;700&family=Sacramento&display=swap"
+        rel="stylesheet">
+    <!-- icon -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 
-
-<body class="p-0 mh-100 " data-spy="scroll">
-    <!-- navbar -->
-    <% include ../partials/navbar %>
-    <!-- end nav-bar  -->
-    <% if (posts) { %>
-    <div class="container text-center" style="margin-top: 100px;">
-        <h3><%= posts[0].category_name %></h3>
-        <hr>
-    </div> <% } %>
-    <div class=" container mt-5 ">
-        <div class="row">
-            <% posts.forEach(post => { %>
-            <div class="card mb-3 col-12 ">
-                <div class="row no-gutters mb-3">
-
-                    <div class="col">
-                        <div class="card-body">
-                            <a href="/post/<%=post.post_slug %>" class="">
-                                <h5 class="card-title"><%= post.post_title %></h5>
-                            </a>
-                            <p class="card-text"> <small class="text-muted"></small>
-                                <%= moment(post.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></small>
-                            </p>
-                            <p class=" card-text "><small class="text-muted"></small>
-                                ---posted by <%= post.email %> --- </small>
-                            </p>
-                        </div>
+<body class="home blog wp-embed-responsive has-sidebar has-sidebar-right mode-light tw-h-full">
+    <div id="site" class="site tw-flex tw-flex-col tw-h-full tw-relative tw-transition-200">
+        <% include ../partials/nav-blog %>
+        <main id="site-content" class="site-content tw-relative tw-flex-1 tw-z-10">
+            <% if (posts) { %>
+            <div class="section has-mode mode-dark tw-bg-black tw-relative tw-py-10 lg_tw-py-14"
+                style="margin-top: 6vw; margin-bottom:6vw;">
+                <div class="tw-container tw-text-center tw-relative">
+                    <div class="tw-max-w-3xl tw-mx-auto">
+                        <h1 class="tw-text-3xl lg_tw-text-4xl tw-mb-0"> Category:<%= posts[0].category_name %></h1>
                     </div>
                 </div>
             </div>
-            <% }) %>
-        </div>
-    </div>
-    <div class="container" style="margin-top: 100px;">
-        <% categories.forEach(category => { %>
-        <a href="/category/<%= category.category_slug %>"><button
-                class="btn btn-dark"><%= category.category_name %></button></a>
-        <% }); %>
-    </div>
+            <% } %>
+            <div class="section section-main tw-py-12 lg_tw-py-16 tw-flex tw-flex-row">
+                <div class="tw-container">
+                    <div class="tw-flex tw-flex-row tw-flex-wrap tw--mx-4 tw--mb-8">
+                        <!-- each POST -->
+                        <div class="tw-w-full tw-px-4 lg_tw-w-2/3"> <% posts.forEach(post =>{ %>
+                            <div class="content tw-mb-8">
+                                <div class="posts tw--mx-5">
+                                    <div class="tw-flex tw-flex-row tw-flex-wrap tw--mb-10">
+                                        <div class="tw-w-full tw-h-auto tw-px-5 tw-mb-10">
+                                            <article
+                                                class="post-style-card tw-bg-surface tw-flex tw-flex-col tw-relative md_tw-flex-row post-23 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-beauty tag-diet tag-female tag-makeup">
+                                                <div
+                                                    class="post-media post-media-image tw-bg-alt tw-relative tw-aspect-ratio-16/9 md_tw-aspect-ratio-none md_tw-max-w-xs md_tw-w-1/3 lg_tw-w-1/2">
+                                                    <a href="#title"
+                                                        class="post-thumbnail tw-block tw-absolute tw-inset-0"> <img
+                                                            width="1280" height="720"
+                                                            src="https://photo-3-baomoi.zadn.vn/w1000_r1/2019_03_17_309_30005171/a1057025af65463b1f74.jpg"
+                                                            class="tw-h-full tw-w-full tw-object-cover wp-post-image lazyautosizes ls-is-cached lazyloaded"
+                                                            alt="title" sizes="224px"> </a>
+                                                </div>
+                                                <div
+                                                    class="post-body tw-flex-1 tw-p-6 md_tw-p-8 tw-text-left lg_tw-p-8">
+                                                    <div class="post-header">
+                                                        <div
+                                                            class="post-categories tw-overline tw-text-accent tw-inherit-link-colors tw-text-xs tw-mb-2">
+                                                            <a href="/category<%= post.category_name %>"
+                                                                rel="category tag"><%= post.category_name %></a></div>
+                                                        <h2 class="post-title tw-text-2xl lg_tw-text-2xl tw-mb-0"> <a
+                                                                href="/post/<%=post.post_slug %>"
+                                                                rel="bookmark"><%= post.post_title %></a></h2>
+                                                        <div class="post-meta tw-text-sm tw-text-soft tw-mt-4"> <span
+                                                                class="post-meta-author"><span>By</span> <a
+                                                                    class="tw-text-strong hover_tw-no-underline"
+                                                                    href=""><%= post.email %></a><br></span> <time
+                                                                class="post-meta-date"><%= moment(post.updated_at).format('MMMM Do YYYY, h:mm:ss a') %></time>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-excerpt tw-mt-4">
+                                                        <p class="tw-mb-0 tw-mt-4"> <a href="/post/<%=post.post_slug %>"
+                                                                class="post-more-link tw-overline tw-font-semibold tw-text-sm tw-text-strong hover_tw-no-underline">Read
+                                                                post <i class="fa fa-arrow-right tw-ml-2"> </i></a></p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                            <!-- navigation -->
+                            <% if ( posts.length > 4 ) { %>
+                            <nav class="navigation pagination " role="navigation">
+                                <h2 class="screen-reader-text">Posts navigation</h2>
+                                <div class="nav-links tw-flex"><span aria-current="page"
+                                        class="page-numbers current">1</span> <a class="page-numbers"
+                                        href="https://stein.rifki.net/rosenstein/page/2/">2</a> <a
+                                        class="next page-numbers"
+                                        href="https://stein.rifki.net/rosenstein/page/2/"><span
+                                            class="tw-mr-2">Next</span><i class="fa fa-arrow-right"></i></a></div>
+                            </nav>
+                            <% } %>
+                            <!-- end navigation -->
+                            <% include ../partials/categories %>
 
+                            
+
+                        </div>
+
+                        <!-- end each POST -->
+
+                        <% include ../partials/bottom-blog %>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <% include ../partials/footer-blog  %>
+
+
+    </div> <a href="#top"
+        class="scroll-to-top tw-fixed tw-bottom-0 tw-right-0 tw-h-8 tw-w-8 tw-inline-flex tw-items-center tw-justify-center tw-bg-accent tw-text-white hover_tw-text-white tw-text-lg tw-leading-none tw-shadow-lg tw-rounded-full hover_tw-no-underline tw-transition-opacity hover_tw-opacity-75 tw-mr-4 tw-mb-4 lg_tw-mr-6 lg_tw-mb-6 tw-z-50 tw-opacity-0 tw-pointer-events-none"><i
+            class="fa fa-angle-up"></i></a>
+    <% include ../partials/side-menu-blog %>
+
+    <script
+        type="text/javascript">var wpcf7 = { "apiSettings": { "root": "https:\/\/stein.rifki.net\/rosenstein\/wp-json\/contact-form-7\/v1", "namespace": "contact-form-7\/v1" } };</script>
+    <script
+        type="text/javascript">var stein_config = { "ajax_url": "https:\/\/stein.rifki.net\/rosenstein\/wp-admin\/admin-ajax.php", "breakpoints": { "sm": 480, "md": 720, "lg": 1024, "xl": 1280 }, "custom_propertis_polyfill_js": "https:\/\/stein.rifki.net\/rosenstein\/wp-content\/themes\/stein\/assets\/js\/ie11CustomProperties.js" };</script>
+    <script
+        type="text/javascript">window.MSInputMethodContext && document.documentMode && document.write('<script type="text/javascript" src="' + stein_config.custom_propertis_polyfill_js + '"><\x2fscript>');</script>
+    <script defer=""
+        src="https://stein.rifki.net/rosenstein/wp-content/cache/autoptimize/3/autoptimize_58f417183cad70b54a1323fa179d58bb.php"></script>
 </body>
