@@ -46,7 +46,7 @@ router
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
-    .post(registerMethod);
+    .post(validatorRegister,registerMethod);
 //logout
 router.post('/logout', logoutMethod);
 //Product

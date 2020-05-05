@@ -14,11 +14,11 @@
         <form class="login" action="/login" method="POST">
             <div class="center">
                 <h2 class="form-title" id="signup"><span>or</span>Log in</h2>
-                <div class="form-holder">
-                    <div class="w-100">
+                <div class="form-holder pl-3">
+                    <div class="w-100 pl-3">
                         <% if(errors) { %>
                         <% errors.forEach( error => { %>
-                        <p class="alert alert-danger">
+                        <p class="alert alert-danger pl-3">
                             <%= error.msg %>
                         </p>
                         <% }) %>

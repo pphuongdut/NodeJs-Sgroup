@@ -46,7 +46,6 @@ const postDetailRender = async (req, res) => {
             post_slug: req.params.id,
         })
         .select('*');
-    console.log(postdetail);
     const tags = await knex('tags').select('*');
     return res.render('client/pages/postdetail', {
         title: postdetail.post_title,
@@ -62,7 +61,6 @@ const postDetailRender = async (req, res) => {
     });
 };
 //method
-
 const newPostMethod = async (req, res) => {
     const post_id = await knex('posts')
         .insert({
@@ -82,7 +80,6 @@ const newPostMethod = async (req, res) => {
                 tag_name: tags[index],
             })
             .first('*');
-        console.log(tag_exist);
         if (typeof tag_exist != 'undefined') {
             if (tags[index] != ' ') {
                 const tag_id = tag_exist.tag_id;
