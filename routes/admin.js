@@ -75,7 +75,7 @@ router
 router
     .route('/register')
     .get(verifynotAuthentication, registerRender)
-    .post(registerMethod);
+    .post(validatorRegister, registerMethod);
 router.post('/logout', logoutMethod);
 //USER
 router

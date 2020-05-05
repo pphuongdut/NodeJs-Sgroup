@@ -32,6 +32,9 @@ const {
     categoryDetailRender,
 } = require('../app/Client/Categories/Category.Controller');
 const { tagRender } = require('../app/Client/Post/Tag.Controller');
+const {
+    uploadFile,
+} = require('../app/Admin/Products/Product/Middlewares/Product.middleware');
 // home render
 router.get('/Judostore', productsRender);
 //login
@@ -52,7 +55,11 @@ router.route('/product/:id').get(detailProductRender);
 router.route('/product-type/:id').get(detailProductTypeRender);
 
 // POSTs
-router.route('/new-post').get(newPostRender).post(newPostMethod);
+router
+    .route('/new-post')
+    .get(newPostRender)
+    .post(uploadFile.single('imgPost'), newPostMethod);
+//
 router.route('/posts').get(postRender);
 router.route('/post/:id').get(postDetailRender);
 // CATEGORIES

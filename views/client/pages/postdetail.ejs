@@ -75,7 +75,7 @@
                             
                                             </article>
                                             <div class="post-tags tw-flex tw-flex-wrap tw-mt-6 tw--mb-2">
-                                                <% if (tags) tags.forEach(tag => { %>
+                                                <% if (tag_of_post) tag_of_post.forEach(tag => { %>
                                                 <a href="/tag/<%=tag.tag_id %>" class="tag-cloud-link tag-link-5 tag-link-position-1" style="font-size: 0.875rem;"
                                                     aria-label="Beautiful (6 items)"><%= tag.tag_name %></a>
                                                 <% }) %>

@@ -61,9 +61,7 @@ const loginMethod = async (req, res, Promise) => {
 };
 
 const registerMethod = async (req, res, Promise) => {
-    console.log('checked');
     const { email, password, fullname, username } = req.body;
-    console.log(validationResult(req));
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors.array());

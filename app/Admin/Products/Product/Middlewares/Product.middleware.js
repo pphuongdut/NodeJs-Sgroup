@@ -4,10 +4,11 @@ let diskStorage = multer.diskStorage({
         callback(null, 'public/uploads');
     },
     filename: (req, file, callback) => {
-        let filename = `${Date.now()}-product-${file.originalname}`;
+        let filename = `${Date.now()}-${file.originalname}`;
+        console.log(filename);
         callback(null, filename);
     },
 });
-let uploadFile = multer({ storage: diskStorage });
 
+let uploadFile = multer({ storage: diskStorage });
 module.exports = { uploadFile };

@@ -7,7 +7,7 @@ const newPostRender = async (req, res) => {
         categories: await knex('categories').select('*'),
         product_types: await knex('product_types').select('*'),
         tags: await knex('tags').select('*'),
-
+        usernow: req.session.user,
     });
 };
 
@@ -16,13 +16,10 @@ const postRender = async (req, res) => {
         .leftJoin('categories', 'posts.category_id', 'categories.category_id')
         .leftJoin('users', 'posts.user_id', 'users.id')
         .select('*');
-    const tags = await knex('post_tags')
-        .leftJoin('tags', 'post_tags.tag_id', 'tags.tag_id')
-        .select('*');
+    const tags = await knex('tags').select('*');
     return res.render('client/pages/post-main', {
         title: 'Post',
         posts,
-
         moment,
         product_types: await knex('product_types').select('*'),
         categories: await knex('categories').select('*'),
@@ -42,7 +39,7 @@ const postDetailRender = async (req, res) => {
         .leftJoin('categories', 'posts.category_id', 'categories.category_id')
         .leftJoin('users', 'posts.user_id', 'users.id')
         .select('*');
-    const tags = await knex('post_tags')
+    const tag_of_post = await knex('post_tags')
         .leftJoin('posts', 'post_tags.post_id', 'posts.post_id')
         .leftJoin('tags', 'post_tags.tag_id', 'tags.tag_id')
         .where({
@@ -50,9 +47,9 @@ const postDetailRender = async (req, res) => {
         })
         .select('*');
     console.log(postdetail);
+    const tags = await knex('tags').select('*');
     return res.render('client/pages/postdetail', {
         title: postdetail.post_title,
-
         posts,
         postdetail: postdetail,
         product_types: await knex('product_types').select('*'),
@@ -61,9 +58,11 @@ const postDetailRender = async (req, res) => {
         moment,
         tags,
         posts,
+        tag_of_post,
     });
 };
 //method
+
 const newPostMethod = async (req, res) => {
     const post_id = await knex('posts')
         .insert({
@@ -72,6 +71,7 @@ const newPostMethod = async (req, res) => {
             category_id: req.body.category_id,
             user_id: req.session.user.id,
             post_slug: slugify(req.body.post_title) + '-' + Date.now(),
+            img_src: req.body.imgPost,
         })
         .returning('post_id');
     const tag = req.body.tags;
@@ -84,11 +84,13 @@ const newPostMethod = async (req, res) => {
             .first('*');
         console.log(tag_exist);
         if (typeof tag_exist != 'undefined') {
-            const tag_id = tag_exist.tag_id;
-            await knex('post_tags').insert({
-                tag_id: tag_id,
-                post_id: post_id,
-            });
+            if (tags[index] != ' ') {
+                const tag_id = tag_exist.tag_id;
+                await knex('post_tags').insert({
+                    tag_id: tag_id,
+                    post_id: post_id,
+                });
+            }
         } else {
             const tag_id = await knex('tags').insert({
                 tag_name: tags[index],

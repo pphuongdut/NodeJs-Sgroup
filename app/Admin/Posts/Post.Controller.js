@@ -77,6 +77,7 @@ const postEditClient = async (req, res) => {
         });
     return res.redirect('/posts');
 };
+
 module.exports = {
     postRender,
     postDetailRender,
